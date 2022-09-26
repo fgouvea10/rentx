@@ -1,9 +1,9 @@
 interface ImportCategoryRequest {
-  file: any;
+  file: Express.Multer.File;
 }
 
 export class ImportCategoryUseCase {
-  execute({ file }: ImportCategoryRequest) {
+  execute({ file }: ImportCategoryRequest): void {
     console.log(file);
   }
 }
