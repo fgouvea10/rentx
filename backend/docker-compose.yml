@@ -21,9 +21,9 @@ services:
     volumes:
       - .:/usr/app
     links:
-    - database
-  depends_on: 
-    - database
+    - rentx_database
+    depends_on: 
+    - rentx_database
 
 volumes:
   pgdata:
