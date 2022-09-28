@@ -3,6 +3,7 @@ import { hash } from "bcryptjs";
 
 import { UserDTO } from "../../dtos/user";
 import { IUsersRepository } from "../../repositories/IUsersRepository";
+import { AppError } from "../../../../errors/AppError";
 
 @injectable()
 export class CreateUserUseCase {
@@ -23,9 +24,9 @@ export class CreateUserUseCase {
       username
     );
 
-    if (emailAlreadyExists) throw new Error("Email already exists");
+    if (emailAlreadyExists) throw new AppError("Email already exists");
 
-    if (usernameAlreadyExists) throw new Error("Username already exists");
+    if (usernameAlreadyExists) throw new AppError("Username already exists");
 
     const passwordHash = await hash(password, 8);
 
