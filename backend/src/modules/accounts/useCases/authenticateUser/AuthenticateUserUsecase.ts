@@ -43,9 +43,15 @@ export class AuthenticateUserUseCase {
       expiresIn: "1d",
     });
 
-    return {
-      user,
+    const tokenResponse: AuthenticateUserResponse = {
       token,
+      user: {
+        name: user.name,
+        username: user.username,
+        email: user.email,
+      },
     };
+
+    return tokenResponse;
   }
 }
