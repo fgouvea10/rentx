@@ -1,9 +1,10 @@
 import "reflect-metadata";
+import "dotenv/config";
 import express from "express";
 import swaggerUi from "swagger-ui-express";
 
 import { appRoutes } from "./routes";
-import swaggerFile from "./swagger.json";
+import swaggerFile from "./swagger.json"; 
 
 import "./database";
 import "./shared/container";
@@ -16,4 +17,4 @@ app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 app.use("/api/v1", appRoutes);
 
-app.listen(8000, () => console.log("Server is running"));
+app.listen(process.env.SERVER_PORT, () => console.log("Server is running"));
