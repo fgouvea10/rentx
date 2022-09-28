@@ -2,9 +2,9 @@ import { inject, injectable } from "tsyringe";
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 
-import { UserDTO } from "../../dtos/user";
-import { IUsersRepository } from "../../repositories/IUsersRepository";
-import { AppError } from "../../../../errors/AppError";
+import { UserDTO } from "@modules/accounts/dtos/user";
+import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
+import { AppError } from "@errors/AppError";
 
 type User = {
   email: string;

@@ -7,10 +7,10 @@ import swaggerUi from "swagger-ui-express";
 
 import { appRoutes } from "./routes";
 import swaggerFile from "./swagger.json";
-import { AppError } from "./errors/AppError";
+import { AppError } from "@errors/AppError";
 
 import "./database";
-import "./shared/container";
+import "@shared/container";
 
 const app = express();
 
