@@ -4,7 +4,7 @@ import { sign } from "jsonwebtoken";
 
 import { UserDTO } from "@modules/accounts/dtos/user";
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
-import { AppError } from "@errors/AppError";
+import { AppError } from "@shared/errors/AppError";
 
 type User = {
   email: string;

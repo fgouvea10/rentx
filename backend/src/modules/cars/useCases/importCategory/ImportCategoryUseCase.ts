@@ -2,7 +2,7 @@ import { inject, injectable } from "tsyringe";
 import fs from "node:fs";
 import { parse } from "csv-parse";
 
-import { CategoriesRepository } from "@modules/cars/repositories/implementations/CategoriesRepository";
+import { CategoriesRepository } from "@modules/cars/infra/typeorm/repositories/CategoriesRepository";
 
 interface ImportCategoryRequest {
   file: Express.Multer.File;
