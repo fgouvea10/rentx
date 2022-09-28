@@ -24,6 +24,9 @@ export class User {
   @Column()
   isAdmin: boolean;
 
+  @Column()
+  avatar: string;
+
   @CreateDateColumn()
   createdAt: Date;
 
