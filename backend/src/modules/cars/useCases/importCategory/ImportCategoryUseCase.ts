@@ -1,3 +1,4 @@
+import { inject, injectable } from "tsyringe";
 import fs from "node:fs";
 import { parse } from "csv-parse";
 
@@ -12,8 +13,12 @@ interface ImportCategory {
   description: string;
 }
 
+@injectable()
 export class ImportCategoryUseCase {
-  constructor(private categoriesRepository: CategoriesRepository) {}
+  constructor(
+    @inject("CategoriesRepository")
+    private categoriesRepository: CategoriesRepository
+  ) {}
 
   loadCategories(file: Express.Multer.File): Promise<ImportCategory[]> {
     return new Promise((resolve, reject) => {
@@ -48,10 +53,10 @@ export class ImportCategoryUseCase {
     categories.map(async (category) => {
       const { name, description } = category;
 
-      const categoryAlreadyExists = this.categoriesRepository.findByName(name);
+      const categoryAlreadyExists = await this.categoriesRepository.findByName(name);
 
       if (!categoryAlreadyExists) {
-        this.categoriesRepository.create({ name, description });
+        await this.categoriesRepository.create({ name, description });
       }
     });
   }
