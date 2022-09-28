@@ -17,7 +17,7 @@ export class CreateUserUseCase {
     email,
     password,
     driverLicense,
-  }: UserDTO.CreateUser): Promise<void> {
+  }: UserDTO.User): Promise<void> {
     const emailAlreadyExists = await this.usersRepository.findByEmail(email);
     const usernameAlreadyExists = await this.usersRepository.findByUsername(
       username

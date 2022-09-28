@@ -17,7 +17,7 @@ export class UsersRepository implements IUsersRepository {
     email,
     password,
     driverLicense,
-  }: UserDTO.CreateUser): Promise<void> {
+  }: UserDTO.User): Promise<void> {
     const user = this.repository.create({
       name,
       username,

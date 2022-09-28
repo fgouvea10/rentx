@@ -27,7 +27,7 @@ export class AuthenticateUserUseCase {
     email,
     password,
   }: Pick<
-    UserDTO.CreateUser,
+    UserDTO.User,
     "email" | "password"
   >): Promise<AuthenticateUserResponse> {
     const user = await this.usersRepository.findByEmail(email);
