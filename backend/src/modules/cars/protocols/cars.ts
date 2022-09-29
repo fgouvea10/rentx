@@ -1,3 +1,5 @@
+import { Specification } from "../infra/typeorm/entities/Specification";
+
 export namespace Car {
   export interface Create {
     name: string;
@@ -7,5 +9,7 @@ export namespace Car {
     fineAmount: number;
     brand: string;
     categoryId: string;
+    specifications?: Specification[];
+    id?: string;
   }
 }

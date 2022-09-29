@@ -9,4 +9,5 @@ export interface ICarsRepository {
     categoryId?: string,
     name?: string
   ): Promise<CarEntity[]>;
+  findById(id: string): Promise<CarEntity>;
 }

@@ -14,6 +14,7 @@ export class CarsRepositoryInMemory implements ICarsRepository {
     fineAmount,
     licensePlate,
     name,
+    id,
   }: Car.Create): Promise<CarEntity> {
     const car = new CarEntity();
 
@@ -25,6 +26,7 @@ export class CarsRepositoryInMemory implements ICarsRepository {
       fineAmount,
       licensePlate,
       name,
+      id,
     });
 
     this.cars.push(car);
@@ -52,5 +54,9 @@ export class CarsRepositoryInMemory implements ICarsRepository {
       }
       return null;
     });
+  }
+
+  async findById(id: string): Promise<CarEntity> {
+    return this.cars.find((car) => car.id === id);
   }
 }
