@@ -52,4 +52,10 @@ export class RentalsRepository implements IRentalsRepository {
     const rental = await this.repository.findOne(id);
     return rental;
   }
+
+  async findRentalsByUserId(userId: string): Promise<Rental[]> {
+    const rentals = await this.repository.find({ userId });
+
+    return rentals;
+  }
 }
