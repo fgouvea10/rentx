@@ -16,11 +16,17 @@ export class RentalsRepository implements IRentalsRepository {
     carId,
     expectedReturnDate,
     userId,
+    id,
+    endDate,
+    total,
   }: RentalProtocol.CreateRental): Promise<Rental> {
     const rental = this.repository.create({
       carId,
       expectedReturnDate,
       userId,
+      id,
+      endDate,
+      total,
     });
 
     await this.repository.save(rental);
@@ -29,12 +35,21 @@ export class RentalsRepository implements IRentalsRepository {
   }
 
   async findOpenRentalByCar(carId: string): Promise<Rental> {
-    const rental = await this.repository.findOne({ carId });
+    const rental = await this.repository.findOne({
+      where: { carId, endDate: null },
+    });
     return rental;
   }
 
   async findOpenRentalByUser(userId: string): Promise<Rental> {
-    const rental = await this.repository.findOne({ userId });
+    const rental = await this.repository.findOne({
+      where: { userId, endDate: null },
+    });
+    return rental;
+  }
+
+  async findById(id: string): Promise<Rental> {
+    const rental = await this.repository.findOne(id);
     return rental;
   }
 }

@@ -3,8 +3,8 @@ import dayjs from "dayjs";
 import { RentalsRepositoryInMemory } from "@modules/rentals/repositories/inMemory/RentalsRepositoryInMemory";
 import { AppError } from "@shared/errors/AppError";
 import { DayJSDateProvider } from "@shared/container/providers/DateProvider/implementations/DayJSDateProvider";
-import { CreateRentalUseCase } from "./CreateRentalUseCase";
 import { CarsRepositoryInMemory } from "@modules/cars/repositories/inMemory/CarsRepositoryInMemory";
+import { CreateRentalUseCase } from "./CreateRentalUseCase";
 
 let createRentalUseCase: CreateRentalUseCase;
 let rentalsRepositoryInMemory: RentalsRepositoryInMemory;
