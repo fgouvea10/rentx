@@ -7,6 +7,7 @@ import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepositor
 import { AppError } from "@shared/errors/AppError";
 
 type User = {
+  id: string;
   email: string;
   name: string;
   username: string;
@@ -50,6 +51,7 @@ export class AuthenticateUserUseCase {
         name: user.name,
         username: user.username,
         email: user.email,
+        id: user.id,
       },
     };
 
