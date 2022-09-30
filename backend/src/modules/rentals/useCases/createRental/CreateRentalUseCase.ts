@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import { inject, injectable } from "tsyringe";
 
 import { Rental } from "@modules/rentals/infra/typeorm/entities/Rental";
 import { IRentalsRepository } from "@modules/rentals/repositories/IRentalsRepository";
@@ -11,9 +11,13 @@ interface CreateRentalRequest {
   expectedReturnDate: Date;
 }
 
+@injectable()
 export class CreateRentalUseCase {
   constructor(
+    @inject("RentalsRepository")
     private rentalsRepository: IRentalsRepository,
+
+    @inject("DayJSDateProvider")
     private dateProvider: IDateProvider
   ) {}
 
