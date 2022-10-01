@@ -5,6 +5,8 @@ import { sign } from "jsonwebtoken";
 import { UserDTO } from "@modules/accounts/dtos/user";
 import { IUsersRepository } from "@modules/accounts/repositories/IUsersRepository";
 import { AppError } from "@shared/errors/AppError";
+import { IUsersTokensRepository } from "@modules/accounts/repositories/IUsersTokensRepository";
+import { IDateProvider } from "@shared/container/providers/DateProvider/IDateProvider";
 
 type User = {
   id: string;
@@ -16,13 +18,20 @@ type User = {
 interface AuthenticateUserResponse {
   user: User;
   token: string;
+  refreshToken: string;
 }
 
 @injectable()
 export class AuthenticateUserUseCase {
   constructor(
     @inject("UsersRepository")
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
+
+    @inject("UsersTokensRepository")
+    private usersTokensRepository: IUsersTokensRepository,
+
+    @inject("DayJSDateProvider")
+    private dateProvider: IDateProvider
   ) {}
 
   async execute({
@@ -38,15 +47,37 @@ export class AuthenticateUserUseCase {
 
     const doesPasswordMatch = await compare(password, user.password);
 
-    if (!doesPasswordMatch) throw new AppError("Email or password incorrect", 401);
+    if (!doesPasswordMatch)
+      throw new AppError("Email or password incorrect", 401);
 
     const token = sign({}, process.env.SERVER_JWT_SECRET, {
       subject: user.id,
       expiresIn: "1d",
     });
 
+    const refreshToken = sign(
+      { email },
+      process.env.SERVER_JWT_REFRESH_TOKEN_SECRET,
+      {
+        subject: user.id,
+        expiresIn: "30d",
+      }
+    );
+
+    const refreshTokenExpiresDays = 30;
+    const refreshTokenExpiresDate = this.dateProvider.addDays(
+      refreshTokenExpiresDays
+    );
+
+    await this.usersTokensRepository.create({
+      userId: user.id,
+      refreshToken,
+      expiresDate: refreshTokenExpiresDate,
+    });
+
     const tokenResponse: AuthenticateUserResponse = {
       token,
+      refreshToken,
       user: {
         name: user.name,
         username: user.username,
