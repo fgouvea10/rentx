@@ -9,7 +9,7 @@ export const Container = styled("main", {
 export const AuthContent = styled("div", {
   padding: "2rem 1rem",
   width: "100%",
-  maxWidth: "640px",
+  maxWidth: "526px",
   margin: "$6 auto",
 
   p: {
@@ -33,7 +33,8 @@ export const InputContainer = styled("div", {
 export const Box = styled("form", {
   background: "white",
   boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
-  padding: "$6",
+  padding: "$7",
+  borderRadius: "$base",
 
   h1: {
     color: "$gray900",
@@ -63,6 +64,12 @@ export const Box = styled("form", {
   "p a": {
     color: "$red500",
     fontWeight: "$medium",
+  },
+
+  "@media (max-width: 526px)": {
+    padding: "$4",
+    background: "transparent",
+    boxShadow: "initial",
   },
 });
 

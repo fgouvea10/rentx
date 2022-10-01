@@ -62,7 +62,7 @@ const Auth: NextPage = () => {
 
             <ButtonContainer>
               <Button
-                loading={isLoading}
+                loading={true}
                 loadingMessage="Entrando..."
                 onClick={handleButton}
               >
