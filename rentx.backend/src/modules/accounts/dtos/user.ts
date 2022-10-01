@@ -8,4 +8,10 @@ export namespace UserDTO {
     driverLicense: string;
     avatar?: string;
   }
+
+  export interface CreateUserToken {
+    userId: string;
+    expiresDate: Date;
+    refreshToken: string;
+  }
 }
