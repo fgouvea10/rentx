@@ -22,7 +22,7 @@ export const globalStyles = globalCss({
   "body, input, textarea, button": {
     fontFamily: "$base",
     fontWeight: "$regular",
-    letterSpacing: "-0.06em",
+    // letterSpacing: "-0.06em",
   },
 
   "h1, h2, h3, h4, h5, h6": {
