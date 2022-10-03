@@ -1,7 +1,8 @@
 {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
+    "node": true
   },
   "settings": {
     "react": {
@@ -24,6 +25,12 @@
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
   "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto",
+      }
+    ],
     "react/prop-types": "off",
     "react/react-in-jsx-scope": "off",
     "no-unused-vars": "off",
