@@ -20,7 +20,7 @@ export class RefreshTokenUseCase {
     private dateProvider: IDateProvider
   ) {}
 
-  async execute(token: string) {
+  async execute(token: string): Promise<string> {
     const { sub, email } = verify(
       token,
       process.env.SERVER_JWT_REFRESH_TOKEN_SECRET
