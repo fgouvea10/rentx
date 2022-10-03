@@ -7,6 +7,10 @@ export interface IUsersTokensRepository {
     refreshToken,
     userId,
   }: UserDTO.CreateUserToken): Promise<UserTokens>;
-  findByUserIdAndRefreshToken(userId: string, refreshToken: string): Promise<UserTokens>;
+  findByUserIdAndRefreshToken(
+    userId: string,
+    refreshToken: string
+  ): Promise<UserTokens>;
   deleteById(id: string): Promise<void>;
+  findByRefreshToken(refreshToken: string): Promise<UserTokens>;
 }
