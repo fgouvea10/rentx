@@ -1,0 +1,39 @@
+.footer {
+  @apply w-full relative bg-black;
+}
+
+.container {
+  @apply w-full max-w-[1280px] my-0 mx-auto py-12 px-4 flex flex-col;
+}
+
+.footer img {
+  @apply w-56 h-auto;
+}
+
+.flex-column {
+  @apply flex justify-between;
+}
+
+.links-container {
+  @apply flex items-start gap-12;
+}
+
+.links-container strong {
+  @apply text-base text-stone-50 font-normal;
+}
+
+.links-container ul {
+  @apply mt-4;
+}
+
+.links-container ul li {
+  @apply text-stone-700 block mt-2 hover:text-stone-300 transition-colors;
+}
+
+.copy {
+  @apply w-full mt-12 border-t border-t-stone-900 py-8;
+}
+
+.copy p {
+  @apply text-stone-600;
+}

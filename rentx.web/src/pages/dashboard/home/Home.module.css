@@ -1,0 +1,111 @@
+.main {
+  @apply w-full relative block bg-gray-50;
+}
+
+.container {
+  @apply w-full max-w-[1280px] my-0 mx-auto px-4 flex flex-col;
+}
+
+.section {
+  @apply w-full relative flex flex-col;
+}
+
+.greetings-content {
+  @apply flex flex-col md:flex-row mt-8 items-stretch justify-between gap-12;
+}
+
+.card {
+  @apply border bg-white border-gray-200 rounded-md p-8 w-full;
+}
+
+.profile-card {
+  @apply flex items-center gap-12;
+}
+
+.profile-card-center {
+  @apply flex flex-col items-start;
+}
+
+.user-name {
+  @apply text-stone-700 text-2xl leading-tight;
+}
+
+.small-text {
+  @apply text-stone-500 text-base;
+}
+
+.points-card {
+  @apply flex flex-col items-start justify-center h-full;
+}
+
+.points-text {
+  @apply text-primary500 text-4xl font-medium leading-tight;
+}
+
+.flex-between {
+  @apply w-full flex items-center justify-between;
+}
+
+.section-title {
+  @apply text-stone-700 text-2xl leading-tight;
+}
+
+.section-link {
+  @apply underline text-primary500;
+}
+
+.grid-container {
+  @apply w-full grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 mt-8 relative grid gap-8;
+}
+
+.reservation-card-container {
+  @apply flex items-center gap-4 justify-between;
+}
+
+.info-car-text {
+  @apply block uppercase text-gray-500 text-xs;
+}
+
+.car-name {
+  @apply block text-gray-700 text-lg font-medium leading-tight;
+}
+
+.car-daily-price {
+  @apply block text-primary500 text-xl font-medium leading-tight;
+}
+
+.reservation-card-container img {
+  @apply w-36 h-auto;
+}
+
+.active-reservation-animated {
+  @apply absolute top-0 right-0 -mr-1 -mt-1 w-4 h-4 rounded-full bg-primary500 animate-ping;
+}
+
+.active-reservation {
+  @apply absolute top-0 right-0 -mr-1 -mt-1 w-4 h-4 rounded-full bg-green-300;
+}
+
+.app-content {
+  @apply w-full mb-24 flex items-center gap-12 lg:mb-0;
+}
+
+.app-content img {
+  @apply hidden lg:block;
+}
+
+.app-info {
+  @apply flex flex-col gap-8;
+}
+
+.app-info h3 {
+  @apply text-stone-700 text-2xl leading-tight;
+}
+
+.app-info p {
+  @apply max-w-2xl text-stone-500;
+}
+
+.stores-button-container {
+  @apply flex items-center gap-6;
+}

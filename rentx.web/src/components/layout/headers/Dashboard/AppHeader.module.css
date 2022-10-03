@@ -1,5 +1,5 @@
 .header {
-  @apply w-full relative bg-gray-50 border-b border-b-gray-100;
+  @apply w-full relative bg-white border-b border-b-gray-100;
 }
 
 .container {
