@@ -1,9 +1,4 @@
-import React, { useState } from 'react';
-
 export function ReservationDetails() {
-  const [show, setShow] = useState(false);
-  const [show2, setShow2] = useState(false);
-
   return (
     <main>
       {/* <div className={styles['img-container']}

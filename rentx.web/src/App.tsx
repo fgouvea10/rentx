@@ -1,8 +1,7 @@
-import { HeroLayout } from "./layouts/Hero";
+import { Routes } from './routes';
 
 import '~/styles/global.css';
-import { DashboardLayout } from "./layouts/dashboard";
 
 export function App() {
-  return <DashboardLayout />;
+  return <Routes />;
 }

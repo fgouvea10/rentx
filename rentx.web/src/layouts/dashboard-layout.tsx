@@ -1,14 +1,12 @@
 import { AppFooter } from '~/components/layout/footers/dashboard';
 import { AppHeader } from '~/components/layout/headers/Dashboard';
-import { Dashboard } from '~/pages/dashboard/home';
-import { ReservationDetails } from '~/pages/dashboard/reservations/details';
-import { ReservationsList } from '~/pages/dashboard/reservations/list';
+import { AppRoutes } from '~/routes/dashboard.routes';
 
 export function DashboardLayout() {
   return (
     <>
       <AppHeader />
-      <ReservationDetails />
+      <AppRoutes />
       <AppFooter />
     </>
   );

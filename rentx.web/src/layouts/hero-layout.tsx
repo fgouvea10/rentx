@@ -1,12 +1,13 @@
 import { HeroHeader } from "~/components/layout/headers/Hero";
-import { Home } from "~/pages/home/hero";
+
+import { HeroRoutes } from "~/routes/hero.routes";
 
 export function HeroLayout() {
   return (
     <>
       <HeroHeader />
       <main>
-        <Home />
+        <HeroRoutes />
       </main>
     </>
   )
