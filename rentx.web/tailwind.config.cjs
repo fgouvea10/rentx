@@ -1,8 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
-    "./src/components/layout/**/**/*.tsx",
-    "./src/pages/**/*.tsx"
+    './src/components/layout/**/**/*.tsx',
+    './src/pages/**/*.tsx',
+    './src/components/shared/**/*.tsx',
   ],
   theme: {
     extend: {
@@ -14,6 +15,9 @@ module.exports = {
       },
       fontFamily: {
         sans: 'DM Sans, sans-serif',
+      },
+      borderRadius: {
+        base: '4px',
       },
     },
   },

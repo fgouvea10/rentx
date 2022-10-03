@@ -1,0 +1,31 @@
+.header {
+  @apply w-full relative bg-gray-50 border-b border-b-gray-100;
+}
+
+.container {
+  @apply w-full max-w-[1280px] my-0 mx-auto p-4 flex items-center justify-between;
+}
+
+.header img {
+  @apply w-40 h-auto;
+}
+
+.flex-center {
+  @apply flex items-center gap-8;
+}
+
+.header ul li {
+  @apply text-stone-500 font-normal hover:text-primary500 transition-colors;
+}
+
+.header ul li.active {
+  @apply text-primary500 font-medium;
+}
+
+.header button:first-child {
+  @apply p-1 bg-transparent border-0 leading-[0] rounded-[4px] hover:bg-gray-200 transition-colors
+}
+
+.header button:first-child svg {
+  @apply text-gray-500
+}
