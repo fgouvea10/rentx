@@ -62,7 +62,7 @@ export function SignIn() {
           <h1>Entre em sua conta</h1>
           <p>
             É a sua primeira vez no site?{' '}
-            <a href="/register" className={styles['info-link']}>
+            <a href="/auth/register" className={styles['info-link']}>
               Crie sua conta
             </a>
           </p>
