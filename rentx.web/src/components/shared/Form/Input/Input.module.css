@@ -1,0 +1,27 @@
+.input-col {
+  @apply w-full flex flex-col;
+}
+
+.input-container {
+  @apply relative w-full;
+}
+
+.input-container input {
+  @apply block w-full appearance-none border border-gray-300 bg-transparent px-2.5 pb-2.5 pt-4 text-sm text-gray-900 focus:border-black focus:outline-none focus:ring-0;
+}
+
+.input-container label {
+  @apply cursor-auto absolute top-2 left-1 z-10 origin-[0] -translate-y-4 scale-75 transform bg-white px-2 text-sm text-gray-500 duration-300;
+}
+
+.input-error {
+  @apply !border-red-600;
+}
+
+.label-error {
+  @apply !text-red-600;
+}
+
+.error-message {
+  @apply text-sm !text-red-600;
+}
