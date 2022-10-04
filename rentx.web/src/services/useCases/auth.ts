@@ -1,18 +1,8 @@
 import { client } from '../client';
+import { Authentication } from '../protocols/auth';
 
-interface Response {
-  token: string;
-  refreshToken: string;
-  user: {
-    name: string;
-    username: string;
-    email: string;
-    id: string;
-  };
-}
-
-export function authenticateUser(email: string, password: string) {
-  const response = client.post<Response>('/auth/session', {
+export function authenticateUser({ email, password }: Authentication.Request) {
+  const response = client.post<Authentication.Response>('/auth/session', {
     email,
     password,
   });
