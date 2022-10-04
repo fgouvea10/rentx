@@ -8,7 +8,7 @@ interface PrivateRouteProps {
 export function PrivateRoute({ element }: PrivateRouteProps): JSX.Element {
   const location = useLocation();
 
-  const isUserSignedIn = true;
+  const isUserSignedIn = false;
 
   if (!isUserSignedIn) {
     return <Navigate to="/auth" state={{ from: location }} replace />;
