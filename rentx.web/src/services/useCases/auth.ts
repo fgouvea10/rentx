@@ -1,8 +1,8 @@
 import { client } from '../client';
 import { Authentication } from '../protocols/auth';
 
-export function authenticateUser({ email, password }: Authentication.Request) {
-  const response = client.post<Authentication.Response>('/auth/session', {
+export async function authenticateUser({ email, password }: Authentication.Request) {
+  const response = await client.post<Authentication.Response>('/auth/session', {
     email,
     password,
   });

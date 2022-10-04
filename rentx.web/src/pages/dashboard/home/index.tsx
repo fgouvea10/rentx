@@ -1,15 +1,30 @@
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Avatar } from '~/components/shared/DataDisplay';
 import { AuthContext } from '~/contexts/AuthContext';
+import { getRentalsByUser } from '~/services/useCases/rentals/list-by-user';
 import { AppStoreButton } from './components/AppStoreButton';
 import { PlayStoreButton } from './components/PlayStoreButton';
 
 import styles from './Home.module.css';
 
 export function Dashboard() {
+  // const [rentals, setRentals] = useState()
   const isAppointmentActive = true;
 
   const { user } = useContext(AuthContext);
+
+  const getRentals = async () => {
+    try {
+      const nha = await getRentalsByUser();
+      console.log(nha);
+    } catch (err) {
+      console.log('err', err);
+    }
+  }
+
+  useEffect(() => {
+    getRentals()
+  }, [])
 
   return (
     <main className={styles.main}>
