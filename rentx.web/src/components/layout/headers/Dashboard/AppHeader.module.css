@@ -18,16 +18,17 @@
   @apply text-stone-500 font-normal hover:text-primary500 transition-colors;
 }
 
-.header nav ul li.active {
-  @apply text-primary500 font-medium;
+.notification-btn {
+  @apply p-1 bg-transparent border-0 leading-[0] rounded-[4px] hover:bg-gray-200 transition-colors;
 }
 
-.notification-btn {
-  @apply p-1 bg-transparent border-0 leading-[0] rounded-[4px] hover:bg-gray-200 transition-colors
+.notification-btn,
+.profile-btn {
+  @apply cursor-pointer;
 }
 
 .notification-btn svg {
-  @apply text-gray-500
+  @apply text-gray-500;
 }
 
 .profile-btn {
@@ -43,9 +44,9 @@
 }
 
 .dropdown-item {
-  @apply block text-left py-2 px-4 hover:bg-gray-100
+  @apply block text-left py-2 px-4 hover:bg-gray-100;
 }
 
 .dropdown-item-separated {
-  @apply block w-full py-2 px-4 text-left text-sm text-gray-700 hover:bg-gray-100
+  @apply block w-full py-2 px-4 text-left text-sm text-gray-700 hover:bg-gray-100;
 }

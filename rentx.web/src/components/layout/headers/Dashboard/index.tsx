@@ -1,12 +1,30 @@
 import { ReactElement, useContext, useState } from 'react';
 import { Bell } from 'phosphor-react';
-import { useNavigate } from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import logoImg from '~/assets/logo_text.svg';
 import { AuthContext } from '~/contexts/AuthContext';
 import { Avatar } from '~/components/shared/DataDisplay';
 
 import styles from './AppHeader.module.css';
+
+const HEADER_MOCK = [
+  {
+    label: 'Dashboard',
+    value: 'dashboard',
+    path: '/dashboard',
+  },
+  {
+    label: 'Minhas reservas',
+    value: 'reservations',
+    path: '/dashboard/reservas',
+  },
+  {
+    label: 'Alugar',
+    value: 'availableCars',
+    path: '/dashboard/carros',
+  },
+];
 
 export function AppHeader(): ReactElement {
   const [isProfileDropdownActive, setIsProfileDropdownActive] = useState(false);
@@ -22,28 +40,32 @@ export function AppHeader(): ReactElement {
         <img src={logoImg} alt="" />
         <nav>
           <ul className={styles['flex-center']}>
-            <li className={styles.active}>
-              <a href="/">Dashboard</a>
-            </li>
-            <li>
-              <a href="/">Minhas reservas</a>
-            </li>
-            <li>
-              <a href="/">Alugar</a>
-            </li>
+            {HEADER_MOCK.map((item) => (
+              <li key={item.value}>
+                <NavLink
+                  to={item.path}
+                  className={
+                    location.pathname === item.path
+                      ? 'text-primary500 font-medium'
+                      : ''
+                  }
+                >
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
           </ul>
         </nav>
 
         <div className={styles['flex-center']}>
-          <button type="button" className={styles['notification-btn']}>
+          <div className={styles['notification-btn']}>
             <Bell size={24} />
-          </button>
-          <button
-            type="button"
+          </div>
+          <div
             className={styles['profile-btn']}
             onClick={() => setIsProfileDropdownActive(!isProfileDropdownActive)}
           >
-            <Avatar alt="Felipe Gouvea" />
+            <Avatar alt={user?.name as string} />
             {isProfileDropdownActive && (
               <div id="dropdownDivider" className={styles.dropdown}>
                 <ul className={styles['dropdown-list']}>
@@ -71,7 +93,7 @@ export function AppHeader(): ReactElement {
                 </div>
               </div>
             )}
-          </button>
+          </div>
         </div>
       </div>
     </header>
