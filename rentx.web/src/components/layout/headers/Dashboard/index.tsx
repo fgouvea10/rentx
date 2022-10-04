@@ -1,14 +1,12 @@
 import { ReactElement, useContext, useState } from 'react';
 import { Bell } from 'phosphor-react';
+import { useNavigate } from 'react-router-dom';
 
 import logoImg from '~/assets/logo_text.svg';
-
 import { AuthContext } from '~/contexts/AuthContext';
-
 import { Avatar } from '~/components/shared/DataDisplay';
 
 import styles from './AppHeader.module.css';
-import { useNavigate } from 'react-router-dom';
 
 export function AppHeader(): ReactElement {
   const [isProfileDropdownActive, setIsProfileDropdownActive] = useState(false);
@@ -29,6 +27,9 @@ export function AppHeader(): ReactElement {
             </li>
             <li>
               <a href="/">Minhas reservas</a>
+            </li>
+            <li>
+              <a href="/">Alugar</a>
             </li>
           </ul>
         </nav>
@@ -53,11 +54,6 @@ export function AppHeader(): ReactElement {
                       </a>
                     </li>
                   )}
-                  <li>
-                    <a href="#" className={styles['dropdown-item']}>
-                      Meu perfil
-                    </a>
-                  </li>
                   <li>
                     <a href="#" className={styles['dropdown-item']}>
                       Meus dados

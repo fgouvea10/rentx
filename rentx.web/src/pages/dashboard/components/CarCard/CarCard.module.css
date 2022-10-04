@@ -1,0 +1,39 @@
+.card {
+  @apply border bg-white border-gray-200 rounded-md p-8 w-full flex relative flex-col gap-2;
+}
+
+.brand-name {
+  @apply block uppercase text-gray-500 text-xs;
+}
+
+.car-name {
+  @apply block text-gray-700 text-lg font-medium leading-tight;
+}
+
+.card img {
+  @apply w-full max-w-xs my-0 mx-auto h-auto;
+}
+
+.car-info {
+  @apply flex items-center justify-between;
+}
+
+.car-specifications {
+  @apply flex items-center gap-4;
+}
+
+.car-specification {
+  @apply flex items-center gap-4;
+}
+
+.car-specification svg {
+  @apply text-xl text-primary500;
+}
+
+.car-daily-price {
+  @apply text-primary500 font-medium text-xl;
+}
+
+.car-daily-text {
+  @apply text-stone-500 font-normal text-base;
+}
