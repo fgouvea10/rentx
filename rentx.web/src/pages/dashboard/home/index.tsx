@@ -7,6 +7,8 @@ import styles from './Home.module.css';
 export function Dashboard() {
   const isAppointmentActive = true;
 
+  const user = JSON.parse(localStorage.getItem('@rentx:user-1.0.0')!);
+
   return (
     <main className={styles.main}>
       <section className={styles.section}>
@@ -14,13 +16,13 @@ export function Dashboard() {
           <div className={styles['greetings-content']}>
             <div className={styles.card}>
               <div className={styles['profile-card']}>
-                <Avatar size="xl" alt="Felipe Gouvea" />
+                <Avatar size="xl" alt={user?.user?.name} />
                 <div className={styles['profile-card-center']}>
                   <strong className={styles['user-name']}>
-                    Olá, Felipe Gouvêa
+                    Olá, {user?.user?.name}
                   </strong>
                   <small className={styles['small-text']}>
-                    felipe.gouvea@rentx.com
+                    {user?.user?.email}
                   </small>
                 </div>
               </div>
