@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import { Avatar } from '~/components/shared/DataDisplay';
+import { AuthContext } from '~/contexts/AuthContext';
 import { AppStoreButton } from './components/AppStoreButton';
 import { PlayStoreButton } from './components/PlayStoreButton';
 
@@ -7,9 +9,7 @@ import styles from './Home.module.css';
 export function Dashboard() {
   const isAppointmentActive = true;
 
-  const user = JSON.parse(localStorage.getItem('@rentx:user-1.0.0')!);
-
-  console.log(!!user);
+  const { user } = useContext(AuthContext);
 
   return (
     <main className={styles.main}>
@@ -18,13 +18,13 @@ export function Dashboard() {
           <div className={styles['greetings-content']}>
             <div className={styles.card}>
               <div className={styles['profile-card']}>
-                <Avatar size="xl" alt={user?.user?.name} />
+                <Avatar size="xl" alt={user?.name as string} />
                 <div className={styles['profile-card-center']}>
                   <strong className={styles['user-name']}>
-                    Olá, {user?.user?.name}
+                    Olá, {user?.name}
                   </strong>
                   <small className={styles['small-text']}>
-                    {user?.user?.email}
+                    {user?.email}
                   </small>
                 </div>
               </div>

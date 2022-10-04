@@ -18,6 +18,10 @@
   @apply text-stone-400 mt-2
 }
 
+.form span {
+  @apply text-red-600 mt-4 block;
+}
+
 .form-container {
   @apply mt-8;
 }

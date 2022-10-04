@@ -1,14 +1,20 @@
-import { ReactElement, useState } from 'react';
+import { ReactElement, useContext, useState } from 'react';
 import { Bell } from 'phosphor-react';
 
 import logoImg from '~/assets/logo_text.svg';
 
+import { AuthContext } from '~/contexts/AuthContext';
+
 import { Avatar } from '~/components/shared/DataDisplay';
 
 import styles from './AppHeader.module.css';
+import { useNavigate } from 'react-router-dom';
 
 export function AppHeader(): ReactElement {
   const [isProfileDropdownActive, setIsProfileDropdownActive] = useState(false);
+
+  const { signOut } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   return (
     <header className={styles.header}>
@@ -26,11 +32,12 @@ export function AppHeader(): ReactElement {
         </nav>
 
         <div className={styles['flex-center']}>
-          <button type="button">
+          <button type="button" className={styles['notification-btn']}>
             <Bell size={24} />
           </button>
           <button
             type="button"
+            className={styles['profile-btn']}
             onClick={() => setIsProfileDropdownActive(!isProfileDropdownActive)}
           >
             <Avatar alt="Felipe Gouvea" />
@@ -51,7 +58,7 @@ export function AppHeader(): ReactElement {
                 <div className="py-1">
                   <button
                     type="button"
-                    onClick={() => localStorage.clear()}
+                    onClick={() => signOut(() => navigate('/auth'))}
                     className={styles['dropdown-item-separated']}
                   >
                     Sair da conta

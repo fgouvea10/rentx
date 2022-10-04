@@ -1,11 +1,11 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeSlash } from 'phosphor-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as zod from 'zod';
 
-import { authenticateUser } from '~/services/useCases/auth';
+import { AuthContext } from '~/contexts/AuthContext';
 
 import { Button, Input } from '~/components/shared/Form';
 
@@ -37,22 +37,15 @@ export function SignIn() {
   });
   const navigate = useNavigate();
 
-  console.log(errors);
+  const { signIn, error } = useContext(AuthContext);
+
+  console.log(error);
 
   async function handleSignInUser(data: SignInUserFormData) {
     setIsSigningIn(true);
 
     try {
-      const { email, password } = data;
-      const response = await authenticateUser(email, password);
-
-      const userResponse = {
-        refreshToken: response?.data.refreshToken,
-        token: response?.data.token,
-        user: response?.data.user,
-      };
-
-      localStorage.setItem('@rentx:user-1.0.0', JSON.stringify(userResponse));
+      await signIn(data);
       navigate('/dashboard');
     } catch (err) {
       console.log('err', err);
@@ -73,8 +66,8 @@ export function SignIn() {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M17.8443 9.40395L0.493828 0.86525L0 0.625061V6.82793L11.543 12.5084L17.8443 9.40395ZM46.9999 29.9583V23.7554L35.4981 18.099L29.202 21.2034L46.9999 29.9583ZM46.5114 0.865125L47.0001 0.630942V6.83381L29.8194 15.3005L23.5232 18.4049L0 30V23.7911L17.2219 15.3065L23.518 12.196H23.5232L46.5114 0.865125Z"
               fill="#DC1637"
             />
@@ -94,7 +87,7 @@ export function SignIn() {
               <Input
                 label="E-mail *"
                 id="email"
-                error={errors.email && errors.email.message}
+                error={(errors.email && errors.email.message) || error.message}
                 {...register('email')}
               />
             </div>

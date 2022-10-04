@@ -22,15 +22,15 @@
   @apply text-primary500 font-medium;
 }
 
-.header button:first-child {
+.notification-btn {
   @apply p-1 bg-transparent border-0 leading-[0] rounded-[4px] hover:bg-gray-200 transition-colors
 }
 
-.header button:first-child svg {
+.notification-btn svg {
   @apply text-gray-500
 }
 
-.header button:last-child {
+.profile-btn {
   @apply relative;
 }
 
@@ -47,5 +47,5 @@
 }
 
 .dropdown-item-separated {
-  @apply block py-2 px-4 text-left text-sm text-gray-700 hover:bg-gray-100
+  @apply block w-full py-2 px-4 text-left text-sm text-gray-700 hover:bg-gray-100
 }
