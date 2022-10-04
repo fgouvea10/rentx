@@ -8,9 +8,9 @@ interface PrivateRouteProps {
 export function PrivateRoute({ element }: PrivateRouteProps): JSX.Element {
   const location = useLocation();
 
-  const isUserSignedIn = true;
+  const user = JSON.parse(localStorage.getItem('@rentx:user-1.0.0')!);
 
-  if (!isUserSignedIn) {
+  if (!user) {
     return <Navigate to="/auth" state={{ from: location }} replace />;
   }
 

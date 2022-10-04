@@ -49,9 +49,13 @@ export function AppHeader(): ReactElement {
                   </li>
                 </ul>
                 <div className="py-1">
-                  <a href="#" className={styles['dropdown-item-separated']}>
+                  <button
+                    type="button"
+                    onClick={() => localStorage.clear()}
+                    className={styles['dropdown-item-separated']}
+                  >
                     Sair da conta
-                  </a>
+                  </button>
                 </div>
               </div>
             )}

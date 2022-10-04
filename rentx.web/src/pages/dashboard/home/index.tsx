@@ -9,6 +9,8 @@ export function Dashboard() {
 
   const user = JSON.parse(localStorage.getItem('@rentx:user-1.0.0')!);
 
+  console.log(!!user);
+
   return (
     <main className={styles.main}>
       <section className={styles.section}>
