@@ -4,6 +4,7 @@ import "dotenv/config";
 import express, { NextFunction, Request, Response } from "express";
 import "express-async-errors";
 import swaggerUi from "swagger-ui-express";
+import cors from "cors";
 
 import { appRoutes } from "./routes";
 import swaggerFile from "../../../swagger.json";
@@ -13,6 +14,8 @@ import "@shared/infra/typeorm";
 import "@shared/container";
 
 const app = express();
+
+app.use(cors());
 
 app.use(express.json());
 
