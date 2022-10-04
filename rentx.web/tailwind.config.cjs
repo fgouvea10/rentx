@@ -4,6 +4,8 @@ module.exports = {
     './src/components/layout/**/**/*.tsx',
     './src/pages/**/*.tsx',
     './src/components/shared/**/*.tsx',
+    './src/components/shared/Form/**/*.tsx',
+    './src/pages/auth/**/*.tsx'
   ],
   theme: {
     extend: {
@@ -11,6 +13,7 @@ module.exports = {
         primary400: '#37FB89',
         primary500: '#01CC56',
         primary600: '#00A947',
+        red500: '#DC1637',
         black: '#121214',
       },
       fontFamily: {

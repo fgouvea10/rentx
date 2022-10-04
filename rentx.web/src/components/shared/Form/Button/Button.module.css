@@ -1,0 +1,11 @@
+.btn  {
+  @apply w-full p-4 text-white font-semibold uppercase flex gap-2 items-center justify-center text-sm hover:opacity-80 transition-opacity;
+}
+
+.btn svg {
+  @apply animate-spin;
+}
+
+.btn:disabled {
+  @apply opacity-50
+}
