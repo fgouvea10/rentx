@@ -13,8 +13,10 @@ import { useNavigate } from 'react-router-dom';
 export function AppHeader(): ReactElement {
   const [isProfileDropdownActive, setIsProfileDropdownActive] = useState(false);
 
-  const { signOut } = useContext(AuthContext);
+  const { signOut, user } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  const isAdmin = true;
 
   return (
     <header className={styles.header}>
@@ -44,6 +46,13 @@ export function AppHeader(): ReactElement {
             {isProfileDropdownActive && (
               <div id="dropdownDivider" className={styles.dropdown}>
                 <ul className={styles['dropdown-list']}>
+                  {isAdmin && (
+                    <li>
+                      <a href="#" className={styles['dropdown-item']}>
+                        Portal do admin
+                      </a>
+                    </li>
+                  )}
                   <li>
                     <a href="#" className={styles['dropdown-item']}>
                       Meu perfil
