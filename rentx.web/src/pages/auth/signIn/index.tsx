@@ -1,12 +1,42 @@
-import { useState } from 'react';
-import { ArrowLeft, Eye, EyeSlash } from 'phosphor-react';
+import { FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Eye, EyeSlash } from 'phosphor-react';
+
+import { authenticateUser } from '~/services/useCases/auth';
 
 import { Button, Input } from '~/components/shared/Form';
 
 import styles from './SignIn.module.css';
 
 export function SignIn() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+
+    setLoading(true);
+
+    try {
+      const response = await authenticateUser(email, password);
+      const userResponse = {
+        refreshToken: response?.data.refreshToken,
+        token: response?.data.token,
+        user: response?.data.user,
+      };
+
+      localStorage.setItem('@rentx:user-1.0.0', JSON.stringify(userResponse));
+      navigate('/dashboard');
+    } catch (err) {
+      console.log('err', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <main className={styles['sign-in-container']}>
@@ -28,7 +58,7 @@ export function SignIn() {
           </svg>
         </a>
 
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <h1>Entre em sua conta</h1>
           <p>
             É a sua primeira vez no site?{' '}
@@ -38,12 +68,19 @@ export function SignIn() {
           </p>
           <div className={styles['form-container']}>
             <div>
-              <Input label="E-mail *" id="email" />
+              <Input
+                label="E-mail *"
+                id="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />
             </div>
 
             <div className="mt-6">
               <Input
                 label="Senha *"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 icon={
@@ -64,7 +101,13 @@ export function SignIn() {
               </a>
             </div>
             <div className={styles['button-container']}>
-              <Button type="submit" loading={true} loadingMessage='Entrando...'>Entrar</Button>
+              <Button
+                type="submit"
+                loading={loading}
+                loadingMessage="Entrando..."
+              >
+                Entrar
+              </Button>
             </div>
           </div>
         </form>
