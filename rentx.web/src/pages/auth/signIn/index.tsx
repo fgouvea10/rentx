@@ -1,6 +1,9 @@
 import { FormEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeSlash } from 'phosphor-react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as zod from 'zod';
 
 import { authenticateUser } from '~/services/useCases/auth';
 
@@ -8,21 +11,41 @@ import { Button, Input } from '~/components/shared/Form';
 
 import styles from './SignIn.module.css';
 
+const signInUserValidationSchema = zod.object({
+  email: zod.string().email('Preencha um e-mail válido'),
+  password: zod
+    .string()
+    .min(6, 'A senha não corresponde ao padrão de 6 dígitos'),
+});
+
+type SignInUserFormData = zod.infer<typeof signInUserValidationSchema>;
+
 export function SignIn() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [isSigningIn, setIsSigningIn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm<SignInUserFormData>({
+    resolver: zodResolver(signInUserValidationSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
   const navigate = useNavigate();
 
-  const handleSubmit = async (event: FormEvent) => {
-    event.preventDefault();
+  console.log(errors);
 
-    setLoading(true);
+  async function handleSignInUser(data: SignInUserFormData) {
+    setIsSigningIn(true);
 
     try {
+      const { email, password } = data;
       const response = await authenticateUser(email, password);
+
       const userResponse = {
         refreshToken: response?.data.refreshToken,
         token: response?.data.token,
@@ -34,9 +57,9 @@ export function SignIn() {
     } catch (err) {
       console.log('err', err);
     } finally {
-      setLoading(false);
+      setIsSigningIn(false);
     }
-  };
+  }
 
   return (
     <main className={styles['sign-in-container']}>
@@ -58,7 +81,7 @@ export function SignIn() {
           </svg>
         </a>
 
-        <form className={styles.form} onSubmit={handleSubmit}>
+        <form className={styles.form} onSubmit={handleSubmit(handleSignInUser)}>
           <h1>Entre em sua conta</h1>
           <p>
             É a sua primeira vez no site?{' '}
@@ -71,16 +94,14 @@ export function SignIn() {
               <Input
                 label="E-mail *"
                 id="email"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
+                error={errors.email && errors.email.message}
+                {...register('email')}
               />
             </div>
 
             <div className="mt-6">
               <Input
                 label="Senha *"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
                 id="password"
                 type={showPassword ? 'text' : 'password'}
                 icon={
@@ -91,6 +112,8 @@ export function SignIn() {
                   )
                 }
                 onIconClick={() => setShowPassword(!showPassword)}
+                error={errors.password && errors.password.message}
+                {...register('password')}
               />
             </div>
 
@@ -103,7 +126,7 @@ export function SignIn() {
             <div className={styles['button-container']}>
               <Button
                 type="submit"
-                loading={loading}
+                loading={isSigningIn}
                 loadingMessage="Entrando..."
               >
                 Entrar
