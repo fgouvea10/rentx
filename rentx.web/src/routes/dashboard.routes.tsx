@@ -26,7 +26,7 @@ export function AppRoutes() {
       <Route path="carros">
         <Route index element={<PrivateRoute element={<ListCars />} />} />
       </Route>
-      <Route path="profile" element={<PrivateRoute element={<Profile />} />} />
+      <Route path="perfil" element={<PrivateRoute element={<Profile />} />} />
     </Routes>
   );
 }

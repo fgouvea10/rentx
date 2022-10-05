@@ -31,6 +31,7 @@ export function AppHeader(): ReactElement {
 
   const { signOut, user } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const isAdmin = true;
 
@@ -77,9 +78,9 @@ export function AppHeader(): ReactElement {
                     </li>
                   )}
                   <li>
-                    <a href="#" className={styles['dropdown-item']}>
+                    <Link to="perfil" className={styles['dropdown-item']}>
                       Meus dados
-                    </a>
+                    </Link>
                   </li>
                 </ul>
                 <div className="py-1">
