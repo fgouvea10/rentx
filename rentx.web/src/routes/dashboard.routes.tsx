@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
+import { CarDetails } from '~/pages/dashboard/cars/details';
 import { ListCars } from '~/pages/dashboard/cars/list';
 
 import { Dashboard } from '~/pages/dashboard/home';
@@ -25,6 +26,7 @@ export function AppRoutes() {
       </Route>
       <Route path="carros">
         <Route index element={<PrivateRoute element={<ListCars />} />} />
+        <Route path=':id' element={<PrivateRoute element={<CarDetails />} />} />
       </Route>
       <Route path="perfil" element={<PrivateRoute element={<Profile />} />} />
     </Routes>

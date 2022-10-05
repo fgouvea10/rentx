@@ -1,0 +1,56 @@
+.main {
+  @apply w-full relative block bg-gray-50;
+}
+
+.section {
+  @apply w-full max-w-[1280px] my-0 mx-auto px-4 py-20 flex flex-col;
+}
+
+.container {
+  @apply flex flex-col lg:flex-row items-center justify-center gap-20;
+}
+
+.car-details {
+  @apply flex flex-col;
+}
+
+.car-brand {
+  @apply block uppercase text-gray-500 text-xs;
+}
+
+.car-name {
+  @apply block text-gray-700 text-2xl font-medium leading-tight;
+}
+
+.car-col > p {
+  @apply mt-6 leading-relaxed text-gray-500;
+}
+
+.car-specifications {
+  @apply grid-cols-3 mt-12 relative grid gap-2;
+}
+
+.specification-card {
+  @apply flex flex-col gap-2 items-center justify-center bg-gray-200 rounded-md p-8
+}
+
+.specification-card svg {
+  @apply text-2xl text-stone-800
+}
+
+.specification-card p {
+  @apply text-base text-stone-600
+}
+
+
+.price-container {
+  @apply mt-20 pt-6 border-t border-t-gray-200 flex items-center;
+}
+
+.daily-price {
+  @apply block font-medium text-stone-700 text-xl
+}
+
+.price-container button {
+  @apply w-[50%] ml-auto;
+}
