@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { ListCars } from '~/pages/dashboard/cars/list';
 
 import { Dashboard } from '~/pages/dashboard/home';
+import { Profile } from '~/pages/dashboard/profile';
 import { ReservationDetails } from '~/pages/dashboard/reservations/details';
 import { ReservationsList } from '~/pages/dashboard/reservations/list';
 
@@ -22,9 +23,10 @@ export function AppRoutes() {
           element={<PrivateRoute element={<ReservationDetails />} />}
         />
       </Route>
-      <Route path='carros'>
+      <Route path="carros">
         <Route index element={<PrivateRoute element={<ListCars />} />} />
       </Route>
+      <Route path="profile" element={<PrivateRoute element={<Profile />} />} />
     </Routes>
   );
 }

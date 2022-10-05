@@ -1,0 +1,72 @@
+
+.main {
+  @apply w-full relative block bg-gray-50;
+}
+
+.container {
+  @apply w-full max-w-[1280px] my-0 mx-auto px-4 flex flex-col;
+}
+
+.card {
+  @apply border bg-white border-gray-200 rounded-md p-8 w-full;
+}
+
+.section {
+  @apply w-full relative flex flex-col pt-8 pb-16;
+}
+
+.section-title {
+  @apply text-stone-700 text-2xl leading-tight;
+}
+
+.small-text {
+  @apply text-stone-500 leading-tight my-2 text-base;
+}
+
+.summary {
+  @apply w-full flex flex-col pt-12;
+}
+
+.flex-container {
+  @apply w-full mt-8 relative flex flex-col;
+}
+
+.profile-pic {
+  @apply w-full flex items-center gap-8;
+}
+
+.btn-container {
+  @apply flex flex-col gap-4;
+}
+
+.profile-info {
+  @apply w-full mt-12 flex gap-4 flex-col;
+}
+
+.divided-input {
+  @apply w-full flex items-start gap-4;
+}
+
+.divided-input label {
+  @apply bg-gray-50;
+}
+
+.divided-input > div {
+  @apply w-full;
+}
+
+.password-info {
+  @apply w-full mt-8;
+}
+
+.password-info h2 {
+  @apply font-medium text-xl text-stone-700;
+}
+
+.password-input {
+  @apply w-full mt-6 flex flex-col;
+}
+
+.save-password-btn {
+  @apply w-[20%] ml-auto mt-4;
+}
