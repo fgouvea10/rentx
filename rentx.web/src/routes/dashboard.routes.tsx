@@ -4,6 +4,8 @@ import { ListCars } from '~/pages/dashboard/cars/list';
 
 import { Dashboard } from '~/pages/dashboard/home';
 import { Profile } from '~/pages/dashboard/profile';
+import { RentalDatePicker } from '~/pages/dashboard/rental/rental-datepicker';
+import { RentalLogin } from '~/pages/dashboard/rental/rental-login';
 import { ReservationDetails } from '~/pages/dashboard/reservations/details';
 import { ReservationsList } from '~/pages/dashboard/reservations/list';
 
@@ -26,7 +28,14 @@ export function AppRoutes() {
       </Route>
       <Route path="carros">
         <Route index element={<PrivateRoute element={<ListCars />} />} />
-        <Route path=':id' element={<PrivateRoute element={<CarDetails />} />} />
+        <Route path=":id" element={<PrivateRoute element={<CarDetails />} />} />
+      </Route>
+      <Route path="alugar">
+        <Route index element={<PrivateRoute element={<RentalLogin />} />} />
+        <Route
+          path="date"
+          element={<PrivateRoute element={<RentalDatePicker />} />}
+        />
       </Route>
       <Route path="perfil" element={<PrivateRoute element={<Profile />} />} />
     </Routes>

@@ -1,0 +1,8 @@
+
+.main {
+  @apply w-full relative block bg-gray-50;
+}
+
+.container {
+  @apply w-full max-w-[1280px] my-0 mx-auto px-4 flex flex-col;
+}

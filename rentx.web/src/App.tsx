@@ -7,7 +7,7 @@ import '~/styles/global.css';
 export function App() {
   return (
     <AuthProvider>
-      <Routes />
+        <Routes />
     </AuthProvider>
   );
 }
