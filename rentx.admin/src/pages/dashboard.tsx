@@ -1,14 +1,11 @@
 import {
   ArrowUp,
-  FunnelSimple,
   TrendUp,
   Money,
   Users,
   ShoppingBag,
-  MagnifyingGlass,
 } from "phosphor-react";
 
-import { Input, Select } from "../components/shared/Form";
 import { Badge, Table } from "../components/shared/DataDisplay";
 
 // import { Input, Select } from '~/components/shared/Form';
@@ -179,23 +176,8 @@ export function Dashboard() {
           <div className="w-full flex flex-col xl:w-[70%]">
             <div className="w-full flex flex-col items-start justify-between xl:flex-row xl:items-center">
               <h2 className="text-xl text-stone-700 mb-4 xl:w-[350px] xl:mb-0">
-                Compras recentes
+                Alugueis recentes
               </h2>
-              <div className="w-full flex items-center justify-end gap-2">
-                <div>
-                  <Select
-                    options={options}
-                    defaultValue="Filtros"
-                    leftIcon={<FunnelSimple size={20} />}
-                  />
-                </div>
-                <div>
-                  <Input
-                    placeholder="Pesquisar"
-                    rightIcon={<MagnifyingGlass size={20} color="#c9c9c9" />}
-                  />
-                </div>
-              </div>
             </div>
             <div className="mt-8">
               <Table columns={columns} dataSource={rows} />
