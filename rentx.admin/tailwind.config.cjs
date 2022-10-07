@@ -3,6 +3,7 @@ module.exports = {
   content: [
     './src/components/layout/**/**/*.tsx',
     './src/pages/**/*.tsx',
+    './src/**/*.tsx',
     './src/components/shared/**/*.tsx',
     './src/components/shared/Form/**/*.tsx',
   ],
