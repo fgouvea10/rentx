@@ -1,3 +1,5 @@
+import { DefaultLayout } from "./layouts/default-layout";
+
 export function App() {
-  return <div>hello world</div>;
+  return <DefaultLayout />;
 }
