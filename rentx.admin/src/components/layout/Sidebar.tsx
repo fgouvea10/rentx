@@ -93,14 +93,6 @@ export function Sidebar(): ReactElement {
 
         <ul className="mt-10 flex flex-col gap-4 absolute bottom-0 left-0 w-full">
           <li className="flex gap-2 items-center transition-colors text-sm rounded-xl py-2 px-4 cursor-pointer text-white hover:bg-stone-800">
-            <a
-              className="text-inherit flex gap-2 items-center"
-              href="/settings"
-            >
-              <Gear size={20} color="#F8F8F8" /> Configurações
-            </a>
-          </li>
-          <li className="flex gap-2 items-center transition-colors text-sm rounded-xl py-2 px-4 cursor-pointer text-white hover:bg-stone-800">
             <button
               className="text-inherit flex gap-2 items-center text-[#be1313]"
               onClick={() => {}}
