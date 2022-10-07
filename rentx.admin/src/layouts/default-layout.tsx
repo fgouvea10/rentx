@@ -1,6 +1,7 @@
 import { Header } from "../components/layout/Header"
 import { Sidebar } from "../components/layout/Sidebar";
 import { Dashboard } from "../pages/dashboard";
+import { ListRentals } from "../pages/rentals/list";
 
 export function DefaultLayout() {
   return (
@@ -9,7 +10,7 @@ export function DefaultLayout() {
       <div className='flex flex-col w-full'>
         <Header />
         <div className='min-h-screen flex-1 p-6 lg:p-7 lg:px-16 lg:ml-[16rem]'>
-          <Dashboard />
+          <ListRentals />
         </div>
       </div>
     </main>

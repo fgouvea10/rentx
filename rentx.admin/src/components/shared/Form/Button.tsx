@@ -22,7 +22,7 @@ export function Button({
   if (loading) {
     return (
       <button
-        className="w-full h-12 flex gap-2 items-center justify-center bg-blue-200 text-sm text-white font-normal py-2 px-4 rounded transition-all"
+        className="w-full h-12 flex gap-2 items-center justify-center bg-blue-200 text-sm text-white font-medium py-2 px-4 rounded transition-all"
         disabled={loading}
         {...rest}
       >
@@ -41,7 +41,7 @@ export function Button({
   if (variant === "secondary") {
     return (
       <button
-        className="w-full h-12 flex gap-2 items-center justify-center bg-transparent text-sm text-blue-500 font-normal py-2 px-4 border border-blue-500 rounded transition-all"
+        className="w-full h-12 flex gap-2 items-center justify-center bg-transparent text-sm text-blue-500 font-medium py-2 px-4 border border-blue-500 rounded transition-all"
         disabled={loading}
         {...rest}
       >
@@ -53,7 +53,7 @@ export function Button({
 
   return (
     <button
-      className="w-full h-12 flex gap-2 items-center justify-center bg-blue-500 text-sm hover:bg-blue-700 text-white font-normal py-2 px-4 rounded transition-all disabled:bg-blue-300 disabled:opacity-70 disabled:cursor-not-allowed"
+      className="w-full h-12 flex gap-2 items-center justify-center bg-blue-500 text-sm hover:bg-blue-700 text-white font-medium py-2 px-4 rounded transition-all disabled:bg-blue-300 disabled:opacity-70 disabled:cursor-not-allowed"
       disabled={loading}
       {...rest}
     >

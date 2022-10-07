@@ -4,9 +4,12 @@ import {
   Money,
   Users,
   ShoppingBag,
+  MagnifyingGlass,
+  Bell,
 } from "phosphor-react";
 
 import { Badge, Table } from "../components/shared/DataDisplay";
+import { Input } from "../components/shared/Form";
 
 // import { Input, Select } from '~/components/shared/Form';
 
@@ -92,6 +95,18 @@ export function Dashboard() {
   return (
     <div>
       <section>
+        <div className="flex items-center justify-between">
+          <div className="flex flex-col gap-1">
+            <h1 className="text-3xl font-medium text-stone-700 leading-tight">
+              Bom dia, Felipe!
+            </h1>
+            <p className="font-regular text-stone-400 leading-relaxed">
+              Isto é o que está acontencendo na sua conta RentX hoje.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section className="w-full mt-12">
         <div className="flex flex-wrap items-center gap-8">
           <div className="bg-white p-6 rounded shadow-sm flex items-center justify-center gap-10 w-full lg:max-w-[348px] h-[150px]">
             <div className="flex flex-col gap-2">
