@@ -1,6 +1,9 @@
 import { FunnelSimple, MagnifyingGlass, PlusCircle } from "phosphor-react";
+
 import { Badge, Table } from "../../components/shared/DataDisplay";
 import { Button, Input, Select } from "../../components/shared/Form";
+import { NewRentalModal } from "./components/NewRentalModal";
+import { Modal } from "../../components/shared/DataDisplay/Modal";
 
 export function ListRentals() {
   const columns = [
@@ -125,14 +128,14 @@ export function ListRentals() {
       <section className="w-full mt-20">
         <div className="w-full flex flex-col gap-2 items-center justify-between md:flex-row md:gap-0">
           <div className="w-full flex items-center gap-2">
-            <div className='w-full md:w-auto'>
+            <div className="w-full md:w-auto">
               <Select
                 options={[]}
                 defaultValue="Filtros"
                 leftIcon={<FunnelSimple size={20} />}
               />
             </div>
-            <div className='w-full md:w-[30%]'>
+            <div className="w-full md:w-[30%]">
               <Input
                 placeholder="Pesquisar"
                 rightIcon={<MagnifyingGlass size={20} color="#c9c9c9" />}
@@ -149,6 +152,10 @@ export function ListRentals() {
           <Table columns={columns} dataSource={rows} />
         </div>
       </section>
+
+      <Modal isOpen={true}>
+        <NewRentalModal onClose={() => {}} />
+      </Modal>
     </div>
   );
 }
