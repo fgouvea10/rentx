@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, ReactElement, ReactNode } from "react";
 import { Spinner } from "phosphor-react";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "danger";
   icon?: ReactElement;
   loading?: boolean;
   loadingMessage?: string;
@@ -49,6 +49,17 @@ export function Button({
         {children}
       </button>
     );
+  }
+
+  if (variant === 'danger') {
+    <button
+      className="w-full h-12 flex gap-2 items-center justify-center bg-red-500 text-sm hover:bg-red-700 text-white font-medium py-2 px-4 rounded transition-all disabled:bg-RED-300 disabled:opacity-70 disabled:cursor-not-allowed"
+      disabled={loading}
+      {...rest}
+    >
+      {!!icon && icon}
+      {children}
+    </button>
   }
 
   return (
