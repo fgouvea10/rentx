@@ -11,5 +11,6 @@ export namespace Car {
     categoryId: string;
     specifications?: Specification[];
     id?: string;
+    image: string;
   }
 }

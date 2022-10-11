@@ -13,6 +13,7 @@ export class CreateCarController {
       fineAmount,
       licensePlate,
       name,
+      image,
     } = request.body;
 
     const createCarUseCase = container.resolve(CreateCarUseCase);
@@ -25,6 +26,7 @@ export class CreateCarController {
       fineAmount,
       licensePlate,
       name,
+      image,
     });
 
     return response.status(201).json(car);
