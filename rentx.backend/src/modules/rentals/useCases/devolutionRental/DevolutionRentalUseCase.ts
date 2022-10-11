@@ -29,7 +29,7 @@ export class DevolutionRentalUseCase {
     const car = await this.carsRepository.findById(rental.carId);
     const minDaily = 1;
 
-    if (!rental) throw new AppError("Rental does not exists");
+    if (!rental) throw new AppError("Rental does not exists", 404, "not.found");
 
     const dateNow = this.dateProvider.dateNow();
     let daily = this.dateProvider.compareInDays(

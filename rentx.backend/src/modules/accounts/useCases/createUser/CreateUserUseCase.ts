@@ -24,9 +24,11 @@ export class CreateUserUseCase {
       username
     );
 
-    if (emailAlreadyExists) throw new AppError("Email already exists");
+    if (emailAlreadyExists)
+      throw new AppError("Email already exists", 409, "bad.request");
 
-    if (usernameAlreadyExists) throw new AppError("Username already exists");
+    if (usernameAlreadyExists)
+      throw new AppError("Username already exists", 409, "bad.request");
 
     const passwordHash = await hash(password, 8);
 

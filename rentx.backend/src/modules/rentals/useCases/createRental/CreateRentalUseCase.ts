@@ -36,13 +36,18 @@ export class CreateRentalUseCase {
       carId
     );
 
-    if (isCarUnavailable) throw new AppError("Car is not available");
+    if (isCarUnavailable)
+      throw new AppError("Car is not available", 400, "bad.request");
 
     const hasRentalOpenToUser =
       await this.rentalsRepository.findOpenRentalByUser(userId);
 
     if (hasRentalOpenToUser)
-      throw new AppError("User already has a rental in progress");
+      throw new AppError(
+        "User already has a rental in progress",
+        400,
+        "bad.request"
+      );
 
     const dateNow = this.dateProvider.dateNow();
     const compare = this.dateProvider.compareInHours(
@@ -50,7 +55,8 @@ export class CreateRentalUseCase {
       expectedReturnDate
     );
 
-    if (compare < minHour) throw new AppError("Invalid return time");
+    if (compare < minHour)
+      throw new AppError("Invalid return time", 400, "bad.request");
 
     const rental = await this.rentalsRepository.create({
       userId,

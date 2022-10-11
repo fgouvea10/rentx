@@ -29,12 +29,14 @@ app.use(
       return response.status(err.statusCode).json({
         success: false,
         status: "error",
+        code: err.code,
         message: err.message,
       });
 
     return response.status(500).json({
       success: false,
       status: "error",
+      code: 'internal.server.error',
       message: `Internal Server Error - ${err.message}`,
     });
   }

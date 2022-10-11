@@ -26,7 +26,7 @@ export class CreateCarSpecificationUseCase {
   }: CreateCarSpecificationRequest): Promise<Car> {
     const carExists = await this.carsRepository.findById(carId);
 
-    if (!carExists) throw new AppError("Car does not exists");
+    if (!carExists) throw new AppError("Car does not exists", 404, "not.found");
 
     const specifications = await this.specificationsRepository.findByIds(
       specificationsId

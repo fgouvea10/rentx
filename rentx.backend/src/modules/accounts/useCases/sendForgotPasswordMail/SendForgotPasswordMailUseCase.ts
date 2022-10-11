@@ -36,7 +36,8 @@ export class SendForgotPasswordMailUseCase {
       "forgotPassword.hbs"
     );
 
-    if (!user) throw new AppError("User does not exists");
+    if (!user)
+      throw new AppError("User does not exists", 404, "unavailable.user");
 
     const token = uuidV4();
     const maxHours = 3;

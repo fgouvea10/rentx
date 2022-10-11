@@ -43,12 +43,21 @@ export class AuthenticateUserUseCase {
   >): Promise<AuthenticateUserResponse> {
     const user = await this.usersRepository.findByEmail(email);
 
-    if (!user) throw new AppError("Email or password incorrect", 401);
+    if (!user)
+      throw new AppError(
+        "Email or password incorrect",
+        401,
+        "invalid.credentials"
+      );
 
     const doesPasswordMatch = await compare(password, user.password);
 
     if (!doesPasswordMatch)
-      throw new AppError("Email or password incorrect", 401);
+      throw new AppError(
+        "Email or password incorrect",
+        401,
+        "invalid.credentials"
+      );
 
     const token = sign({}, process.env.SERVER_JWT_SECRET, {
       subject: user.id,
