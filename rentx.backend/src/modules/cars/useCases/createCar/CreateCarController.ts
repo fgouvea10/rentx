@@ -3,6 +3,10 @@ import { container } from "tsyringe";
 
 import { CreateCarUseCase } from "./CreateCarUseCase";
 
+interface File {
+  filename: string;
+}
+
 export class CreateCarController {
   async handle(request: Request, response: Response): Promise<Response> {
     const {
@@ -13,8 +17,12 @@ export class CreateCarController {
       fineAmount,
       licensePlate,
       name,
-      image,
     } = request.body;
+
+    const image = request.file.filename;
+
+    console.log('image', image);
+    console.log('body', request.body);
 
     const createCarUseCase = container.resolve(CreateCarUseCase);
 

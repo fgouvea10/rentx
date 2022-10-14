@@ -18,10 +18,13 @@ const createCarSpecificationController = new CreateCarSpecificationController();
 const uploadCarImagesController = new UploadCarImageController();
 
 const uploadCarImages = multer(uploadConfig.upload("./tmp/cars"));
+const uploadCarImage = multer(uploadConfig.upload("./tmp/cars"));
+// const upload = multer({ dest: "./tmp/cars" });
 
 carsRoutes.post(
   "/",
   ensureAuthenticated,
+  uploadCarImage.single("image"),
   // ensureAdmin,
   createCarController.handle
 );
