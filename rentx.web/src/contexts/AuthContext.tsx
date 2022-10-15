@@ -9,6 +9,8 @@ import { AxiosError } from 'axios';
 
 import keys from '~/constants/storageKeys';
 import { authenticateUser } from '~/services/useCases/auth';
+import { client } from '~/services/client';
+import { sendForgotPasswordMail } from '~/services/useCases/password/sendForgotPasswordMail';
 
 type SignInUserRequest = {
   email: string;
@@ -32,6 +34,7 @@ type AuthContextData = {
   };
   isUserSignedIn: boolean;
   signIn: (data: SignInUserRequest) => Promise<void>;
+  sendForgotPasswordEmail: (email: string) => Promise<void>;
   signOut(callback?: VoidFunction): Promise<void>;
 };
 
@@ -62,19 +65,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   async function signIn(data: SignInUserRequest) {
     try {
-      const { data: loginResponse } = await authenticateUser(data);
+      const { data: response } = await authenticateUser(data);
 
       const storagePayload = {
-        token: loginResponse.token,
-        refreshToken: loginResponse.refreshToken,
-        name: loginResponse.user.name,
-        username: loginResponse.user.name,
-        email: loginResponse.user.email,
-        id: loginResponse.user.id,
+        token: response.token,
+        refreshToken: response.refreshToken,
+        name: response.user.name,
+        username: response.user.name,
+        email: response.user.email,
+        id: response.user.id,
       };
 
       localStorage.setItem(keys.userKey, JSON.stringify(storagePayload));
       setUser(storagePayload);
+      client.defaults.headers.common['Authorization'] = response.refreshToken;
     } catch (err) {
       if (err instanceof AxiosError) {
         if (err.response?.status === Error.UNAUTHORIZED) {
@@ -98,6 +102,23 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  async function sendForgotPasswordEmail(email: string) {
+    try {
+      await sendForgotPasswordMail({email});
+    } catch (err) {
+      if (err instanceof AxiosError) {
+        if (err.response?.status === Error.UNAUTHORIZED) {
+          setError((prevState) => ({
+            ...prevState,
+            code: 404,
+            message: 'E-mail não existe na base de dados',
+          }));
+          return;
+        }
+      }
+    }
+  }
+
   const signOut = useCallback(async (callback?: VoidFunction) => {
     setUser(null);
     localStorage.clear();
@@ -108,6 +129,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     () => ({
       signIn,
       signOut,
+      sendForgotPasswordEmail,
       user,
       isUserSignedIn,
       error,
