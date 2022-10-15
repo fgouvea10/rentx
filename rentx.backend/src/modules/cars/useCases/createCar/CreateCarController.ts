@@ -19,11 +19,6 @@ export class CreateCarController {
       name,
     } = request.body;
 
-    const image = request.file.filename;
-
-    console.log('image', image);
-    console.log('body', request.body);
-
     const createCarUseCase = container.resolve(CreateCarUseCase);
 
     const car = await createCarUseCase.execute({

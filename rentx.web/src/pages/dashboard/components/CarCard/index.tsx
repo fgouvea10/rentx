@@ -7,16 +7,20 @@ import styles from './CarCard.module.css';
 type Specification = {
   doors: number;
   gearbox: string;
-}
+};
 
 type Car = {
+  // id: string;
+  // name: string;
+  // brand: string;
+  // price: number;
+  // specifications: Specification;
+  // image: string;
   id: string;
   name: string;
   brand: string;
-  dailyDate: number;
-  specifications: Specification;
-  image: string;
-}
+  price: string;
+};
 
 type CarCardProps = {
   loading?: boolean;
@@ -44,20 +48,20 @@ export function CarCard({ car, loading }: CarCardProps): ReactElement {
         <small className={styles['brand-name']}>{car.brand}</small>
       </div>
       <img
-        src={car.image}
+        src="http://images.dealer.com/ddc/vehicles/2020/Audi/Q8/SUV/trim_55_Premium_f33abe/perspective/side-left/2020_24.png"
         alt=""
       />
       <div className={styles['car-info']}>
-        <div className={styles['car-specifications']}>
+        {/* <div className={styles['car-specifications']}>
           <div className={styles['car-specification']}>
             <Users /> {car.specifications.doors}
           </div>
           <div className={styles['car-specification']}>
             <ArrowsLeftRight /> {car.specifications.gearbox}
           </div>
-        </div>
+        </div> */}
         <span className={styles['car-daily-price']}>
-          R$ {car.dailyDate.toFixed(2)}
+          R$ {car.price}
           <span className={styles['car-daily-text']}>/dia</span>
         </span>
       </div>

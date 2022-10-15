@@ -1,0 +1,27 @@
+.hero {
+  width: 100%;
+  min-height: 80vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero .texts h1 {
+  color: black;
+  font-size: 50px;
+  font-weight: 500;
+}
+
+.hero .texts p {
+  color: black;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 1.2rem;
+  margin-bottom: 2.5rem;
+}
+
+.hero img {
+  max-width: 768px;
+  height: auto;
+}

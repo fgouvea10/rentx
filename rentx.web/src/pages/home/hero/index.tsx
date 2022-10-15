@@ -1,59 +1,90 @@
+import { AppWindow } from 'phosphor-react';
+
+import styles from './Hero.module.css';
+
+import heroImg from '~/assets/hero-car.png';
+
 export function Home() {
   return (
     <>
-      <section className="w-full min-h-screen relative">
-        <div className="w-full max-w-[1280px] my-0 mx-auto flex items-center justify-between py-8 px-4">
-          <div>
-            <h1 className="text-6xl text-stone-700 leading-tight">
-              Alugue carros de luxo com o <br />
-              <span className="text-primary500 border-b-2 border-b-solid border-b-primary500">
-                menor preço
-              </span>{' '}
-              do mercado
-            </h1>
-            <p className="text-stone-700 mt-12 leading-tight">
-              Está procurando por carros de luxo ou por assinatura com preços
-              que cabem no seu bolso? <br /> Procure{' '}
-              <span className="font-medium text-primary500">bem aqui</span>!
+      <section className={styles.hero} id="home">
+        <div className="row-container">
+          <div className={styles.texts}>
+            <h1>Alugue carros de luxo com o menor preço do mercado</h1>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti
+              ullam tempore eveniet. Inventore perferendis accusantium excepturi
+              tempore architecto quasi! Sequi ut expedita
             </p>
-            {/* <div>
-            <input />
-          </div> */}
+            <div className={styles['app-stores']}>
+              <button>app</button>
+              <button>play</button>
+            </div>
+          </div>
+          <img src={heroImg} alt="" />
+        </div>
+      </section>
+
+      <section className={styles.features}>
+        <div className="row-container">
+          <div className={styles['centered-content']}>
+            <div className={styles['section-presentation-texts']}>
+              <span>O que fazemos</span>
+              <h2>Aproveite o melhor da nossa experiência</h2>
+            </div>
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className={styles['features-card']}>
+                <div className={styles['feature-card']}>
+                  <div className={styles.icon}>
+                    <AppWindow size={24} />
+                  </div>
+                  <strong>A random feature here</strong>
+                  <p>
+                    a random description for the feature and bla bla bla bla
+                    sauhsuy a bokasha uaysg hjabsyuabvs açs
+                  </p>
+                </div>
+              </div>
+            ))}
+
+            <div className={styles['company-presentation']}>
+              <img
+                src="https://img.freepik.com/fotos-premium/duas-pessoas-estao-sentadas-juntas-no-carro-e-olhando-no-tablet-que-a-garota-esta-segurando-eles-estao-olhando-para-a-tela-com-interesse-e-emocao_152404-9518.jpg"
+                alt=""
+              />
+              <div className={styles['company-presentation-texts']}>
+                <h3>Por que escolher a RentX?</h3>
+                <p>
+                  A única empresa que fornece serviços de aluguel de carros de
+                  luxo rápido e fácil.
+                </p>
+                <ul>
+                  {[...Array(4)].map((_, index) => (
+                    <li key={index}>
+                      <strong>Some random feature here</strong>
+                      <p>
+                        another description here and you need to put strong with
+                        underline and flex with texts and img tag
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="w-full min-h-screen relative">
-        <div className="w-full max-w-[1280px] my-0 mx-auto flex items-center justify-between py-8 px-4">
-          <div className="">
-            <span>Nossos serviços</span>
-            <h2>Promova experiências incríveis</h2>
+      <section className={styles['featured-cars']}>
+        <div className='row-container'>
+          <div className={styles['featured-cars-container']}>
+            {/* <Car /> */}
           </div>
-          {/* cards with features */}
-        </div>
-      </section>
-      <section className="w-full min-h-screen relative">
-        <div className="w-full max-w-[1280px] my-0 mx-auto flex items-center justify-between py-8 px-4">
-          <div className="">
-            <span>Nossa linha</span>
-            <h2>Os preferidos dos usuários</h2>
+          <div className={styles['view-more']}>
+            <button type='button'>Ver todos os carros</button>
           </div>
         </div>
       </section>
-      <section className="w-full min-h-screen relative">
-        <div className="w-full max-w-[1280px] my-0 mx-auto flex items-center justify-between py-8 px-4">
-          <div className="">
-            <span>Sobre nós</span>
-            <h2>Tudo começou com uma simples ideia...</h2>
-          </div>
-        </div>
-      </section>
-      {/* <section className='w-full min-h-screen relative'>
-    <div className="w-full max-w-[1280px] my-0 mx-auto flex items-center justify-between py-8 px-4">
-   a section with discount and news letter
-    </div>
-    </section> */}
-      {/* <footer></footer> */}
     </>
   );
 }

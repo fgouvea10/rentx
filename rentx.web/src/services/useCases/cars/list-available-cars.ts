@@ -5,13 +5,13 @@ interface Response {
   id: string;
   name: string;
   brand: string;
-  dailyRate: string;
+  dailyRate: number;
   categoryId: string;
 }
 
-export async function listAvailableCars({
-  brand,
-}: ListAvailableCars.Request): Promise<ListAvailableCars.Response[]> {
+export async function listAvailableCars(
+  brand?: string,
+): Promise<ListAvailableCars.Response[]> {
   const response = await client.get<Response[]>('/cars/available', {
     params: {
       brand,
@@ -22,9 +22,11 @@ export async function listAvailableCars({
     id: car.id,
     name: car.name,
     brand: car.brand,
-    price: car.dailyRate,
+    price: Number(car.dailyRate),
     categoryId: car.categoryId,
   }));
+
+  console.log('where eveyrthing befin', cars);
 
   return cars;
 }
