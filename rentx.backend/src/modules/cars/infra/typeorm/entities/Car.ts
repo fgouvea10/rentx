@@ -25,9 +25,6 @@ export class Car {
   description: string;
 
   @Column()
-  image: string;
-
-  @Column()
   dailyRate: number;
 
   @Column()

@@ -12,7 +12,6 @@ interface CreateCarRequest {
   fineAmount: number;
   brand: string;
   categoryId: string;
-  image: string;
 }
 
 @injectable()
@@ -30,7 +29,6 @@ export class CreateCarUseCase {
     fineAmount,
     licensePlate,
     name,
-    image,
   }: CreateCarRequest): Promise<Car> {
     const carAlreadyExists = await this.carsRepository.findByLicensePlate(
       licensePlate
@@ -46,7 +44,6 @@ export class CreateCarUseCase {
       fineAmount,
       licensePlate,
       name,
-      image,
     });
 
     return car;

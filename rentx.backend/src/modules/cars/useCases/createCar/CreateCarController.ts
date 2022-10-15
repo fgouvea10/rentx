@@ -34,7 +34,6 @@ export class CreateCarController {
       fineAmount,
       licensePlate,
       name,
-      image,
     });
 
     return response.status(201).json(car);
