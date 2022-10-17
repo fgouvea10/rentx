@@ -87,7 +87,7 @@
 }
 
 .app-content {
-  @apply w-full mb-24 flex items-center gap-12 lg:mb-0;
+  @apply w-full mb-24 flex items-center justify-center gap-12 lg:mb-0;
 }
 
 .app-content img {
