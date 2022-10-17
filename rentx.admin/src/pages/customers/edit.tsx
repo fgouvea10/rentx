@@ -1,14 +1,10 @@
-import { Badge } from "../../components/shared/DataDisplay";
 import { Avatar } from "../../components/shared/DataDisplay/Avatar";
 import {
   Button,
   Input,
-  File,
-  Select,
-  Textarea,
 } from "../../components/shared/Form";
 
-export function NewCustomer() {
+export function EditCustomer() {
   return (
     <div>
       <section>
@@ -49,7 +45,7 @@ export function NewCustomer() {
               </div>
               <div className="w-full mt-8 lg:mt-0 flex flex-col items-start justify-between lg:w-[70%]">
                 <div className="w-full flex items-center gap-8">
-                  <Avatar size="xl" />
+                  <Avatar size="xl" alt="UU" />
                   <div className="flex gap-4 flex-col">
                     <Button type="button">Fazer upload</Button>
                     {/* <Button type='button' variant="secondary">Remover foto</Button> */}

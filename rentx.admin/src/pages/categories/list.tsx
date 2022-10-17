@@ -1,8 +1,9 @@
 import { FunnelSimple, MagnifyingGlass, PlusCircle } from "phosphor-react";
+
 import { Badge, Table } from "../../components/shared/DataDisplay";
 import { Button, Input, Select } from "../../components/shared/Form";
 
-export function ListRentals() {
+export function ListCategories() {
   const columns = [
     {
       title: "Usuário",

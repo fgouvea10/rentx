@@ -1,9 +1,16 @@
+import { useContext } from 'react';
+
+import { AuthContext } from '~/contexts/AuthContext';
+
 import { Avatar } from '~/components/shared/DataDisplay';
 import { Button, Input } from '~/components/shared/Form';
+
 import styles from './Profile.module.css';
 
 export function Profile() {
-  const hasProfilePic = true;
+  const { user } = useContext(AuthContext);
+
+  console.log(user);
 
   return (
     <main className={styles.main}>
@@ -21,26 +28,36 @@ export function Profile() {
             <div className={styles['profile-pic']}>
               <Avatar size="xl" alt="Felipe Gouvea Alves" />
               <div className={styles['btn-container']}>
-                <Button type="button">Alterar foto de perfil</Button>
-                {hasProfilePic && (
+                <Button type="button" disabled>Alterar foto de perfil</Button>
+                {/* {hasProfilePic && (
                   <Button type="button" variant="secondary">
                     Remover foto
                   </Button>
-                )}
+                )} */}
               </div>
             </div>
             <div className={styles['profile-info']}>
               <div className={styles['divided-input']}>
                 <div>
-                  <Input id="name" label="Nome" />
+                  <Input id="name" label="Nome" value={user?.name} disabled />
                 </div>
                 <div>
-                  <Input id="username" label="Nome de usuário" />
+                  <Input
+                    id="username"
+                    label="Nome de usuário"
+                    value={user?.username}
+                    disabled
+                  />
                 </div>
               </div>
               <div className={styles['divided-input']}>
                 <div>
-                  <Input id="email" label="E-mail" />
+                  <Input
+                    id="email"
+                    label="E-mail"
+                    value={user?.email}
+                    disabled
+                  />
                 </div>
                 <div>
                   <Input id="driversLicense" label="Carteira de motorista" />

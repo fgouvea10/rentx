@@ -1,5 +1,5 @@
-import { DefaultLayout } from "./layouts/default-layout";
+import { Routes } from "./routes";
 
 export function App() {
-  return <DefaultLayout />;
+  return <Routes />;
 }

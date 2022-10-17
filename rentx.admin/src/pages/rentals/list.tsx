@@ -4,8 +4,11 @@ import { Badge, Table } from "../../components/shared/DataDisplay";
 import { Button, Input, Select } from "../../components/shared/Form";
 import { NewRentalModal } from "./components/NewRentalModal";
 import { Modal } from "../../components/shared/DataDisplay/Modal";
+import { useState } from "react";
 
 export function ListRentals() {
+  const [isNewRentalModalOpen, setIsNewRentalModalOpen] = useState(false);
+
   const columns = [
     {
       title: "Usuário",
@@ -143,7 +146,11 @@ export function ListRentals() {
             </div>
           </div>
           <div className="w-full md:w-[15%]">
-            <Button type="button" icon={<PlusCircle size={20} color="#fff" />}>
+            <Button
+              type="button"
+              icon={<PlusCircle size={20} color="#fff" />}
+              onClick={() => setIsNewRentalModalOpen(true)}
+            >
               Adicionar
             </Button>
           </div>
@@ -153,8 +160,8 @@ export function ListRentals() {
         </div>
       </section>
 
-      <Modal isOpen={true}>
-        <NewRentalModal onClose={() => {}} />
+      <Modal isOpen={isNewRentalModalOpen}>
+        <NewRentalModal onClose={() => setIsNewRentalModalOpen(false)} />
       </Modal>
     </div>
   );
