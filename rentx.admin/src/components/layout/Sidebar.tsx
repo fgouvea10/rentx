@@ -1,4 +1,5 @@
-import { ReactElement, useContext } from "react";
+import { ReactElement } from "react";
+import { Link } from "react-router-dom";
 
 import logoImg from "../../assets/logo_icon.svg";
 
@@ -6,7 +7,6 @@ import {
   SignOut,
   Book,
   Car,
-  Gear,
   Wrench,
   Archive,
   SquaresFour,
@@ -62,12 +62,12 @@ export function Sidebar(): ReactElement {
               key={String(index + 1)}
               className="flex gap-2 items-center transition-colors text-sm rounded-xl py-2 px-4 cursor-pointer text-white hover:bg-stone-800"
             >
-              <a
+              <Link
                 className="text-inherit flex gap-2 items-center"
-                href={item.path}
+                to={item.path}
               >
                 {item.icon} {item.name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
