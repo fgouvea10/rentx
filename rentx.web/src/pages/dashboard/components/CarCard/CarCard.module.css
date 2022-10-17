@@ -31,7 +31,7 @@
 }
 
 .car-daily-price {
-  @apply text-primary500 font-medium text-xl;
+  @apply text-primary500 font-medium text-xl mt-8;
 }
 
 .car-daily-text {

@@ -21,32 +21,32 @@ export function ListCars() {
   const [isFetchingCars, setIsFetchingCars] = useState(false);
   const [cars, setCars] = useState<Car[]>([]);
 
-  // const brands = [
-  //   {
-  //     label: 'Audi',
-  //     value: 'audi',
-  //   },
-  //   {
-  //     label: 'Toyota',
-  //     value: 'audi',
-  //   },
-  //   {
-  //     label: 'Chevrolet',
-  //     value: 'audi',
-  //   },
-  //   {
-  //     label: 'Porsche',
-  //     value: 'audi',
-  //   },
-  //   {
-  //     label: 'Mercedes Benz',
-  //     value: 'audi',
-  //   },
-  //   {
-  //     label: 'BMW',
-  //     value: 'audi',
-  //   },
-  // ]
+  const brands = [
+    {
+      label: 'Audi',
+      value: 'audi',
+    },
+    {
+      label: 'Toyota',
+      value: 'audi',
+    },
+    {
+      label: 'Chevrolet',
+      value: 'audi',
+    },
+    {
+      label: 'Porsche',
+      value: 'audi',
+    },
+    {
+      label: 'Mercedes Benz',
+      value: 'audi',
+    },
+    {
+      label: 'BMW',
+      value: 'audi',
+    },
+  ]
 
   const listCars = async () => {
     setIsFetchingCars(true);
@@ -82,7 +82,7 @@ export function ListCars() {
                 />
               </div>
               <div className="w-[30%]">
-                <Select options={[]} defaultValue="Filtre por marcas" />
+                <Select options={brands} defaultValue="Filtre por marcas" />
               </div>
             </div>
           </div>
