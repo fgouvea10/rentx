@@ -34,6 +34,7 @@ export function AppHeader(): ReactElement {
   const location = useLocation();
 
   const isAdmin = true;
+  const token = user?.refreshToken;
 
   return (
     <header className={styles.header}>
@@ -72,7 +73,19 @@ export function AppHeader(): ReactElement {
                 <ul className={styles['dropdown-list']}>
                   {isAdmin && (
                     <li>
-                      <a href="#" className={styles['dropdown-item']}>
+                      {/* <a
+                        href={`${
+                            import.meta.env.VITE_RENTX_ADMIN_URL
+                          }?token=${token}`,
+                        }
+                        className={styles['dropdown-item']}
+                      > */}
+                      <a
+                        href={`${
+                          import.meta.env.VITE_RENTX_ADMIN_URL
+                        }/redirect?token=${token}`}
+                        className={styles['dropdown-item']}
+                      >
                         Portal do admin
                       </a>
                     </li>

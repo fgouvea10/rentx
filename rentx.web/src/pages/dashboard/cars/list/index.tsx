@@ -46,7 +46,7 @@ export function ListCars() {
       label: 'BMW',
       value: 'audi',
     },
-  ]
+  ];
 
   const listCars = async () => {
     setIsFetchingCars(true);
@@ -94,7 +94,13 @@ export function ListCars() {
             {/* {[...Array(12)].map((_, index) => (
               <CarCard key={index} car={} />
             ))} */}
-            {cars.map(car => <CarCard key={car.id} car={car} />)}
+            {cars.map((car) => (
+              <CarCard
+                key={car.id}
+                car={car}
+                path={`/dashboard/carros/${car.id}`}
+              />
+            ))}
             {/* <p></p> */}
             {/* <p>oi</p> */}
           </div>

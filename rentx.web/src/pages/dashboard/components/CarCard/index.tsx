@@ -24,10 +24,11 @@ type Car = {
 
 type CarCardProps = {
   loading?: boolean;
+  path: string;
   car: Car;
 };
 
-export function CarCard({ car, loading }: CarCardProps): ReactElement {
+export function CarCard({ car, path, loading }: CarCardProps): ReactElement {
   if (loading) {
     return (
       <>
@@ -42,7 +43,7 @@ export function CarCard({ car, loading }: CarCardProps): ReactElement {
   }
 
   return (
-    <Link to={`/reservas/${car.id}`} className={styles.card}>
+    <Link to={path} className={styles.card}>
       <div>
         <strong className={styles['car-name']}>{car.name}</strong>
         <small className={styles['brand-name']}>{car.brand}</small>
