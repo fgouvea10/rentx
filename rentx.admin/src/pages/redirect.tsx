@@ -1,10 +1,7 @@
-import jwt_decode from "jwt-decode";
 import { useEffect } from "react";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
-interface RedirectProps {
-  email: string;
-}
+import { getUser } from "../services/useCases/getUser";
 
 export function Redirect() {
   const location = useLocation();
@@ -12,15 +9,24 @@ export function Redirect() {
 
   const [, token] = location.search.split("=");
 
-  const decoded = jwt_decode(token) as RedirectProps;
-  // console.log(decoded);
+  async function verifyUser() {
+    try {
+      const response = await getUser({ token });
+      if (!response.isAdmin)
+        return (window.location.href = `${
+          import.meta.env.VITE_RENTX_WEB_URL
+        }/auth`);
+
+      navigate("/");
+    } catch (err) {
+      console.log("failed err", err);
+      window.location.href = `${import.meta.env.VITE_RENTX_WEB_URL}/auth`;
+    }
+  }
 
   useEffect(() => {
-    if (decoded.email === "felipe.gouvea@rentx.com") {
-      // TODO: save token in storage
-      navigate("/");
-    }
-  }, [decoded]);
+    verifyUser();
+  }, []);
 
   return (
     <main className="w-full min-h-screen overflow-hidden flex items-center justify-center">
