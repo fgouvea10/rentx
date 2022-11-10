@@ -1,7 +1,12 @@
-import { createContext, ReactNode, useCallback, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useMemo,
+  useState,
+} from "react";
 
-import { destroyStorage, getStorage } from "../services/storage";
+import { destroyStorage, getStorage, setStorage } from "../services/storage";
 import { getUser } from "../services/useCases/getUser";
 
 type User = {
@@ -40,8 +45,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     return null;
   });
 
-  const navigate = useNavigate();
-
   const isAuthenticated = !!user;
 
   async function verifyIfUserIsAdmin({
@@ -49,14 +52,19 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }: VerifyUserType): Promise<string | undefined> {
     try {
       const response = await getUser({ token });
+      console.log("response", response);
       if (!response.isAdmin)
         return (window.location.href = `${
           import.meta.env.VITE_RENTX_WEB_URL
         }/auth`);
 
-      navigate("/");
+      setStorage("token", token);
+      setStorage("user", JSON.stringify(response));
+      setUser(response);
+
+      window.location.href = `${import.meta.env.VITE_RENTX_ADMIN_URL}`;
     } catch (err) {
-      console.log("failed err", err);
+      setUser(null);
       window.location.href = `${import.meta.env.VITE_RENTX_WEB_URL}/auth`;
     }
   }

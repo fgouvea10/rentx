@@ -1,3 +1,4 @@
+import { Spinner } from "phosphor-react";
 import { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -15,7 +16,7 @@ export function Redirect() {
 
   return (
     <main className="w-full min-h-screen overflow-hidden flex items-center justify-center">
-      <h1>Carregando informações da sua sessão...</h1>
+      <Spinner size={128} color='#000' weight="bold" className="animate-spin" />
     </main>
   );
 }
