@@ -82,12 +82,12 @@ export function Sidebar(): ReactElement {
               key={String(index * 10)}
               className="flex gap-2 items-center transition-colors text-sm rounded-xl py-2 px-4 cursor-pointer text-white hover:bg-stone-800"
             >
-              <a
+              <Link
                 className="text-inherit flex gap-2 items-center"
-                href={item.path}
+                to={item.path}
               >
                 {item.icon} {item.name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
