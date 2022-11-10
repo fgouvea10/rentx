@@ -25,6 +25,11 @@ export class RentalsRepositoryInMemory implements IRentalsRepository {
     return rental;
   }
 
+  async list(): Promise<Rental[]> {
+    const rentals = this.rentals;
+    return rentals;
+  }
+
   async findOpenRentalByCar(carId: string): Promise<Rental> {
     return this.rentals.find(
       (rental) => rental.carId === carId && !rental.endDate
