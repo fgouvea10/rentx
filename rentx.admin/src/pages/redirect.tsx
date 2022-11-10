@@ -16,7 +16,7 @@ export function Redirect() {
 
   return (
     <main className="w-full min-h-screen overflow-hidden flex items-center justify-center">
-      <Spinner size={128} color='#000' weight="bold" className="animate-spin" />
+      <Spinner size={96} weight="bold" className="animate-spin text-red-500" />
     </main>
   );
 }

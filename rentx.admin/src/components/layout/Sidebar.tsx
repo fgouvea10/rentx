@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 import { Link } from "react-router-dom";
 
 import logoImg from "../../assets/logo_icon.svg";
@@ -12,6 +12,7 @@ import {
   SquaresFour,
   Users,
 } from "phosphor-react";
+import { AuthContext } from "../../contexts/AuthContext";
 
 const SIDEBAR_MOCK = [
   [
@@ -51,6 +52,8 @@ const SIDEBAR_MOCK = [
 ];
 
 export function Sidebar(): ReactElement {
+  const { signOut } = useContext(AuthContext);
+
   return (
     <aside className="hidden lg:flex w-[250px] fixed left-0 h-screen bg-stone-900 p-3 pt-8 duration-300 z-10">
       <div className="px-2 py-4 flex flex-col w-full h-full relative">
@@ -95,7 +98,14 @@ export function Sidebar(): ReactElement {
           <li className="flex gap-2 items-center transition-colors text-sm rounded-xl py-2 px-4 cursor-pointer text-white hover:bg-stone-800">
             <button
               className="text-inherit flex gap-2 items-center text-[#be1313]"
-              onClick={() => {}}
+              onClick={() =>
+                signOut(
+                  () =>
+                    (window.location.href = `${
+                      import.meta.env.VITE_RENTX_WEB_URL
+                    }/auth`)
+                )
+              }
             >
               <SignOut size={20} color="#be1313" /> Sair da conta
             </button>
