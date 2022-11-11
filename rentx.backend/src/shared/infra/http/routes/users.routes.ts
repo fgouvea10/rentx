@@ -7,6 +7,7 @@ import { UpdateUserAvatarController } from "@modules/accounts/useCases/updateUse
 import uploadConfig from "@config/upload";
 import { ensureAuthenticated } from "@shared/infra/http/middlewares/ensureAuthenticated";
 import { GetUserController } from "@modules/accounts/useCases/getUser/GetUserController";
+import { ensureAdmin } from "../middlewares/ensureAdmin";
 
 export const usersRoutes = Router();
 
@@ -24,3 +25,5 @@ usersRoutes.patch(
   updateUserAvatarController.handle
 );
 usersRoutes.get("/me", ensureAuthenticated, getUserController.handle);
+
+usersRoutes.get("/:id", ensureAuthenticated, getUserController.handle);

@@ -42,6 +42,4 @@ app.use(
   }
 );
 
-console.log('oi')
-
 app.listen(process.env.SERVER_PORT, () => console.log("Server is running"));
