@@ -1,13 +1,27 @@
+import { useEffect, useState } from "react";
 import { FunnelSimple, MagnifyingGlass, PlusCircle } from "phosphor-react";
 
 import { Badge, Table } from "../../components/shared/DataDisplay";
 import { Button, Input, Select } from "../../components/shared/Form";
 import { NewRentalModal } from "./components/NewRentalModal";
 import { Modal } from "../../components/shared/DataDisplay/Modal";
-import { useState } from "react";
+
+import { listRentals } from "../../services/useCases/rentals/listRentals";
+import { getUserById } from "../../services/useCases/users/getById";
+import { getCarById } from "../../services/useCases/cars/getCarById";
+import { formatDate } from "../../utils/format";
+
+type Rental = {
+  car: string;
+  date: string;
+  status: string;
+  user: string;
+};
 
 export function ListRentals() {
   const [isNewRentalModalOpen, setIsNewRentalModalOpen] = useState(false);
+  const [rentals, setRentals] = useState<Rental[]>([]);
+  const [isFetchingRentals, setIsFetchingRentals] = useState(true);
 
   const columns = [
     {
@@ -26,9 +40,8 @@ export function ListRentals() {
       key: "status",
       render: (value: string | number | JSX.Element) => {
         const badgeType = {
-          Aprovada: "green",
-          "Em processamento": "yellow",
-          "Não aprovada": "red",
+          Entregue: "green",
+          "Em andamento": "yellow",
         } as any;
 
         return <Badge type={badgeType[value as any]}>{value}</Badge>;
@@ -41,69 +54,45 @@ export function ListRentals() {
     },
   ];
 
-  const rows = [
-    {
-      user: "Felipe Gouvea",
-      car: "Toyota Corolla",
-      status: "Em processamento",
-      date: "12/04/2023",
-    },
-    {
-      user: "Felipe Gouvea",
-      car: "Toyota Corolla",
-      status: "Não aprovada",
-      date: "12/04/2023",
-    },
-    {
-      user: "Felipe Gouvea",
-      car: "Toyota Corolla",
-      status: "Aprovada",
-      date: "12/04/2023",
-    },
-    {
-      user: "Felipe Gouvea",
-      car: "Toyota Corolla",
-      status: "Aprovada",
-      date: "12/04/2023",
-    },
-    {
-      user: "Felipe Gouvea",
-      car: "Toyota Corolla",
-      status: "Aprovada",
-      date: "12/04/2023",
-    },
-    {
-      user: "Felipe Gouvea",
-      car: "Toyota Corolla",
-      status: "Aprovada",
-      date: "12/04/2023",
-    },
-    {
-      user: "Felipe Gouvea",
-      car: "Toyota Corolla",
-      status: "Não aprovada",
-      date: "12/04/2023",
-    },
-    {
-      user: "Felipe Gouvea",
-      car: "Toyota Corolla",
-      status: "Não aprovada",
-      date: "12/04/2023",
-    },
+  const formatRentalStatusToPortuguese = {
+    delivered: "Entregue",
+    "in-progress": "Em andamento",
+  };
 
-    {
-      user: "Felipe Gouvea",
-      car: "Toyota Corolla",
-      status: "Não aprovada",
-      date: "12/04/2023",
-    },
-    {
-      user: "Felipe Gouvea",
-      car: "Toyota Corolla",
-      status: "Não aprovada",
-      date: "12/04/2023",
-    },
-  ];
+  async function getRentals() {
+    try {
+      const rentalsResponse = await listRentals();
+
+      const mappedRentals = await Promise.all(
+        rentalsResponse.map(async (rental: any) => {
+          const user = await getUserById(rental.userId);
+          const car = await getCarById(rental.carId);
+
+          const object = {
+            user: user?.name,
+            car: car?.name,
+            status:
+              rental?.expectedReturnDate <= Date.now()
+                ? formatRentalStatusToPortuguese["delivered"]
+                : formatRentalStatusToPortuguese["in-progress"],
+            date: formatDate(rental?.createdAt),
+          };
+
+          return object;
+        })
+      );
+
+      setRentals(mappedRentals);
+    } catch (err) {
+      console.log("err", err);
+    } finally {
+      setIsFetchingRentals(false);
+    }
+  }
+
+  useEffect(() => {
+    getRentals();
+  }, []);
 
   return (
     <div>
@@ -156,7 +145,11 @@ export function ListRentals() {
           </div>
         </div>
         <div className="w-full mt-8">
-          <Table columns={columns} dataSource={rows} />
+          <Table
+            columns={columns}
+            dataSource={rentals}
+            loading={isFetchingRentals}
+          />
         </div>
       </section>
 
