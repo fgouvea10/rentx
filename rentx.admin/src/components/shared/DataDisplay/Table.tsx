@@ -67,8 +67,8 @@ export function Table({ columns, dataSource, loading }: TableProps) {
         <tbody>
           {dataSource.map((row, index) => (
             <tr key={index} className="bg-white border-b">
-              {columns.map((column) => (
-                <td className="py-4 px-6 border-t-[10px] border-t-gray-50 border-b-[10px] border-b-gray-50">
+              {columns.map((column, idx) => (
+                <td key={String(idx+1)} className="py-4 px-6 border-t-[10px] border-t-gray-50 border-b-[10px] border-b-gray-50">
                   {column.render?.(row[column.dataIndex]) ??
                     row[column.dataIndex]}
                 </td>
