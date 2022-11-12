@@ -83,7 +83,7 @@
 }
 
 .active-reservation {
-  @apply absolute top-0 right-0 -mr-1 -mt-1 w-4 h-4 rounded-full bg-green-300;
+  @apply absolute top-0 right-0 -mr-1 -mt-1 w-4 h-4 rounded-full bg-red-300;
 }
 
 .app-content {
