@@ -1,5 +1,5 @@
 import { FormEvent, useContext, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { Eye, EyeSlash } from 'phosphor-react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -37,9 +37,7 @@ export function SignIn() {
   });
   const navigate = useNavigate();
 
-  const { signIn, error } = useContext(AuthContext);
-
-  console.log(error);
+  const { signIn, isAuthenticated, error } = useContext(AuthContext);
 
   async function handleSignInUser(data: SignInUserFormData) {
     setIsSigningIn(true);
@@ -48,11 +46,13 @@ export function SignIn() {
       await signIn(data);
       navigate('/dashboard');
     } catch (err) {
-      console.log('err', err);
+      // console.log('err', err);
     } finally {
       setIsSigningIn(false);
     }
   }
+
+  if (isAuthenticated) return <Navigate to="/dashboard" replace />;
 
   return (
     <main className={styles['sign-in-container']}>
