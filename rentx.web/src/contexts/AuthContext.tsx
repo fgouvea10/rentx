@@ -32,7 +32,7 @@ type AuthContextData = {
     code: number;
     message: string;
   };
-  isUserSignedIn: boolean;
+  isAuthenticated: boolean;
   signIn: (data: SignInUserRequest) => Promise<void>;
   sendForgotPasswordEmail: (email: string) => Promise<void>;
   signOut(callback?: VoidFunction): Promise<void>;
@@ -60,8 +60,6 @@ export function AuthProvider({ children }: AuthProviderProps) {
     code: 0,
     message: '',
   });
-
-  const isUserSignedIn = !!user;
 
   async function signIn(data: SignInUserRequest) {
     try {
@@ -131,10 +129,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
       signOut,
       sendForgotPasswordEmail,
       user,
-      isUserSignedIn,
+      isAuthenticated: !!user,
       error,
     }),
-    [signIn, signOut, user, isUserSignedIn],
+    [signIn, signOut, user],
   );
 
   return (
