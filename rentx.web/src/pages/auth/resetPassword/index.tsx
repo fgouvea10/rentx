@@ -39,9 +39,7 @@ export function ResetPassword() {
   });
   const navigate = useNavigate();
 
-  const { signIn, error } = useContext(AuthContext);
-
-  console.log(error);
+  const { signIn } = useContext(AuthContext);
 
   async function handleSignInUser(data: SignInUserFormData) {
     setIsSigningIn(true);

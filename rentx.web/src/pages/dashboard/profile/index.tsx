@@ -10,8 +10,6 @@ import styles from './Profile.module.css';
 export function Profile() {
   const { user } = useContext(AuthContext);
 
-  console.log(user);
-
   return (
     <main className={styles.main}>
       <div className={styles['summary']}>
