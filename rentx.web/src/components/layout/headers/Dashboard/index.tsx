@@ -39,7 +39,8 @@ export function AppHeader(): ReactElement {
 
   async function checkIfUserIsAdmin() {
     try {
-      const response = await getUserById(user?.id as string);
+      const id = user?.id as string;
+      const response = await getUserById({ id });
       setHasAdminPermission(response?.isAdmin);
     } catch (err) {
       // console.log('err', err);
@@ -47,7 +48,7 @@ export function AppHeader(): ReactElement {
   }
 
   useEffect(() => {
-    checkIfUserIsAdmin()
+    checkIfUserIsAdmin();
   }, []);
 
   return (
