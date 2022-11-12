@@ -1,8 +1,9 @@
-import { ReactElement, useContext, useState } from 'react';
+import { ReactElement, useContext, useEffect, useState } from 'react';
 import { Bell } from 'phosphor-react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 
 import logoImg from '~/assets/logo_text.svg';
+import { getUserById } from '~/services/useCases/user/getById';
 import { AuthContext } from '~/contexts/AuthContext';
 import { Avatar } from '~/components/shared/DataDisplay';
 
@@ -28,13 +29,26 @@ const HEADER_MOCK = [
 
 export function AppHeader(): ReactElement {
   const [isProfileDropdownActive, setIsProfileDropdownActive] = useState(false);
+  const [hasAdminPermission, setHasAdminPermission] = useState(false);
 
   const { signOut, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const isAdmin = true;
   const token = user?.refreshToken;
+
+  async function checkIfUserIsAdmin() {
+    try {
+      const response = await getUserById(user?.id as string);
+      setHasAdminPermission(response?.isAdmin);
+    } catch (err) {
+      // console.log('err', err);
+    }
+  }
+
+  useEffect(() => {
+    checkIfUserIsAdmin()
+  }, []);
 
   return (
     <header className={styles.header}>
@@ -71,22 +85,15 @@ export function AppHeader(): ReactElement {
             {isProfileDropdownActive && (
               <div id="dropdownDivider" className={styles.dropdown}>
                 <ul className={styles['dropdown-list']}>
-                  {isAdmin && (
+                  {hasAdminPermission && (
                     <li>
-                      {/* <a
-                        href={`${
-                            import.meta.env.VITE_RENTX_ADMIN_URL
-                          }?token=${token}`,
-                        }
-                        className={styles['dropdown-item']}
-                      > */}
                       <a
                         href={`${
                           import.meta.env.VITE_RENTX_ADMIN_URL
                         }/redirect?token=${token}`}
                         className={styles['dropdown-item']}
                       >
-                        Portal do admin
+                        Painel do admin
                       </a>
                     </li>
                   )}
