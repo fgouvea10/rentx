@@ -1,5 +1,7 @@
-import { ReactElement } from 'react';
+import { ReactElement, useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
+
+import { AuthContext } from '~/contexts/AuthContext';
 
 interface PrivateRouteProps {
   element: ReactElement;
@@ -8,9 +10,9 @@ interface PrivateRouteProps {
 export function PrivateRoute({ element }: PrivateRouteProps): JSX.Element {
   const location = useLocation();
 
-  const user = JSON.parse(localStorage.getItem('@rentx:user-1.0.0')!);
+  const { isAuthenticated } = useContext(AuthContext);
 
-  if (!user) {
+  if (!isAuthenticated) {
     return <Navigate to="/auth" state={{ from: location }} replace />;
   }
 
