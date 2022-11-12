@@ -1,4 +1,4 @@
-import { ReactElement, useContext, useEffect, useState } from 'react';
+import { ReactElement, useContext, useEffect, useMemo, useState } from 'react';
 import { Bell } from 'phosphor-react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 
@@ -9,24 +9,6 @@ import { Avatar } from '~/components/shared/DataDisplay';
 
 import styles from './AppHeader.module.css';
 
-const HEADER_MOCK = [
-  {
-    label: 'Dashboard',
-    value: 'dashboard',
-    path: '/dashboard',
-  },
-  {
-    label: 'Minhas reservas',
-    value: 'reservations',
-    path: '/dashboard/reservas',
-  },
-  {
-    label: 'Alugar',
-    value: 'availableCars',
-    path: '/dashboard/carros',
-  },
-];
-
 export function AppHeader(): ReactElement {
   const [isProfileDropdownActive, setIsProfileDropdownActive] = useState(false);
   const [hasAdminPermission, setHasAdminPermission] = useState(false);
@@ -36,6 +18,27 @@ export function AppHeader(): ReactElement {
   const location = useLocation();
 
   const token = user?.refreshToken;
+
+  const HEADER_MOCK = useMemo(
+    () => [
+      {
+        label: 'Dashboard',
+        value: 'dashboard',
+        path: '/dashboard',
+      },
+      {
+        label: 'Minhas reservas',
+        value: 'reservations',
+        path: '/dashboard/reservas',
+      },
+      {
+        label: 'Alugar',
+        value: 'availableCars',
+        path: '/dashboard/carros',
+      },
+    ],
+    [],
+  );
 
   async function checkIfUserIsAdmin() {
     try {
