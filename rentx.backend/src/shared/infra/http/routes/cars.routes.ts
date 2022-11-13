@@ -23,6 +23,8 @@ const uploadCarImages = multer(uploadConfig.upload("./tmp/cars"));
 const uploadCarImage = multer(uploadConfig.upload("./tmp/cars"));
 // const upload = multer({ dest: "./tmp/cars" });
 
+carsRoutes.get("/available", listAvailableCarsController.handle);
+
 carsRoutes.post(
   "/",
   ensureAuthenticated,
@@ -32,8 +34,6 @@ carsRoutes.post(
 );
 
 carsRoutes.get("/:id", ensureAuthenticated, getCarByIdController.handle);
-
-carsRoutes.get("/available", listAvailableCarsController.handle);
 
 carsRoutes.post(
   "/specifications/:id",
