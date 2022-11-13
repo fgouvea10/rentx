@@ -11,6 +11,7 @@ import {
   Archive,
   SquaresFour,
   Users,
+  ArrowLeft,
 } from "phosphor-react";
 import { AuthContext } from "../../contexts/AuthContext";
 
@@ -95,6 +96,14 @@ export function Sidebar(): ReactElement {
         <div className="w-full h-[1px] bg-stone-800 mt-6" />
 
         <ul className="mt-10 flex flex-col gap-4 absolute bottom-0 left-0 w-full">
+          <li className="flex gap-2 items-center transition-colors text-sm rounded-xl py-2 px-4 cursor-pointer text-white hover:bg-stone-800">
+            <a
+              href={`${import.meta.env.VITE_RENTX_WEB_URL}/dashboard`}
+              className="flex items-center gap-2"
+            >
+              <ArrowLeft size={20} color="#F8F8F8" /> Voltar para o painel
+            </a>
+          </li>
           <li className="flex gap-2 items-center transition-colors text-sm rounded-xl py-2 px-4 cursor-pointer text-white hover:bg-stone-800">
             <button
               className="text-inherit flex gap-2 items-center text-[#be1313]"
