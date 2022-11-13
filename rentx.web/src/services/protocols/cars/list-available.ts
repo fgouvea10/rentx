@@ -1,13 +1,12 @@
 export namespace ListAvailableCars {
   export type Request = {
-    brand?: string;
+    name?: string;
   };
 
   export type Response = {
     id: string;
     name: string;
     brand: string;
-    price: number;
-    categoryId: string;
+    price: string;
   };
 }

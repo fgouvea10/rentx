@@ -1,25 +1,38 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
+import { Link } from 'react-router-dom';
 import { Avatar } from '~/components/shared/DataDisplay';
 import { AuthContext } from '~/contexts/AuthContext';
 import { getRentalsByUser } from '~/services/useCases/rentals/list-by-user';
+import { CarCard } from '../components/CarCard';
 import { AppStoreButton } from './components/AppStoreButton';
 import { PlayStoreButton } from './components/PlayStoreButton';
 
 import styles from './Home.module.css';
 
+type Rental = {
+  name: string;
+  brand: string;
+  price: string;
+  id: string;
+  expectedReturnDate?: string;
+};
+
 export function Dashboard() {
-  // const [rentals, setRentals] = useState()
-  const isAppointmentActive = true;
+  const [rentals, setRentals] = useState<Rental[]>([]);
+  const [isFetchingRentals, setIsFetchingRentals] = useState(true);
 
   const { user } = useContext(AuthContext);
 
   const getRentals = async () => {
     try {
-      const nha = await getRentalsByUser();
-      console.log(nha);
+      const response = await getRentalsByUser();
+      const slicedArray = response.slice(0, 3); // get the latest 3 rentals of user
+      setRentals(slicedArray);
     } catch (err) {
-      console.log('err', err);
+      // console.log('err', err);
+    } finally {
+      setIsFetchingRentals(false);
     }
   };
 
@@ -66,59 +79,37 @@ export function Dashboard() {
           <div className={styles.container}>
             <div className={styles['flex-between']}>
               <h2 className={styles['section-title']}>Últimas reservas</h2>
-              <a href="/" className={styles['section-link']}>
-                Ver todas
-              </a>
+              {rentals && rentals.length > 0 && (
+                <Link to="reservas" className={styles['section-link']}>
+                  Ver todas
+                </Link>
+              )}
             </div>
             <div className={styles['grid-container']}>
-              {[...Array(3)].map((_, index) => (
-                <a
-                  key={index}
-                  href="/reservas/as86uja-gahb8s-asgbv7"
-                  className={`${styles.card} relative`}
-                >
-                  <div className={styles['reservation-card-container']}>
-                    <div className="flex flex-col gap-4 justify-between">
-                      <div>
-                        <small className={styles['info-car-text']}>
-                          Porsche
-                        </small>
-                        <span className={styles['car-name']}>
-                          Random porsche
-                        </span>
-                      </div>
-                      <div>
-                        <small className={styles['info-car-text']}>
-                          Ao dia
-                        </small>
-                        <span className={styles['car-daily-price']}>
-                          R$ 340
-                        </span>
-                      </div>
-                    </div>
-                    <img
-                      src="https://www.picng.com/upload/porsche/png_porsche_22652.png"
-                      alt=""
-                    />
-                  </div>
-                  {isAppointmentActive && (
-                    <>
-                      <div
-                        className={styles['active-reservation-animated']}
-                      ></div>
-                      <div
-                        title="Reserva em andamento"
-                        className={styles['active-reservation']}
-                      ></div>
-                    </>
-                  )}
-                </a>
-              ))}
+              {rentals && rentals.length > 0 ? (
+                rentals.map((rental) => {
+                  // const isRentalInProgress =
+                  //   rental?.expectedReturnDate &&
+                  //   Number(rental.expectedReturnDate) >= Date.now();
+                  return <CarCard car={rental} isRentalInProgress={false} />;
+                })
+              ) : (
+                <>
+                  <p className='text-stone-600'>
+                    Você ainda não possui nenhuma alocação :(
+                    <br />
+                    <Link to="carros" className="underline text-primary500">
+                      Clique aqui
+                    </Link>{' '}
+                    para alugar um agora. É simples e rápido!
+                  </p>
+                </>
+              )}
             </div>
           </div>
         </section>
 
-        <section className={`${styles.section} mt-24`}>
+        <section className={`${styles.section} mt-28`}>
           <div className={styles.container}>
             <div className={styles['app-content']}>
               <img src="https://www.localiza.com/assets/images/footer/img-aplicativoPT.png" />
