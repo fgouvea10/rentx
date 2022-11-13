@@ -7,7 +7,7 @@
 }
 
 .container {
-  @apply flex flex-col lg:flex-row items-center justify-center gap-20;
+  @apply flex w-full flex-col lg:flex-row items-center justify-center gap-20;
 }
 
 .car-details {
