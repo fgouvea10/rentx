@@ -32,7 +32,7 @@ export function Dashboard() {
     } catch (err) {
       // console.log('err', err);
     } finally {
-      // setIsFetchingRentals(false);
+      setIsFetchingRentals(false);
     }
   };
 
