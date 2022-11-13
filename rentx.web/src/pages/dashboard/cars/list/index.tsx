@@ -1,5 +1,6 @@
 import { MagnifyingGlass } from 'phosphor-react';
 import { useEffect, useState } from 'react';
+import { Helmet } from 'react-helmet';
 
 import { Select } from '~/components/shared/Form';
 import { Input } from '~/pages/dashboard/components/SearchInput';
@@ -12,8 +13,7 @@ type Car = {
   id: string;
   name: string;
   brand: string;
-  price: number;
-  categoryId: string;
+  price: string;
 };
 
 export function ListCars() {
@@ -53,6 +53,7 @@ export function ListCars() {
 
     try {
       const response = await listAvailableCars();
+      console.log(response);
       // console.log(response);
       setCars(response);
     } catch (err) {
@@ -61,51 +62,57 @@ export function ListCars() {
       setIsFetchingCars(false);
     }
   };
+
   useEffect(() => {
     listCars();
-  }, []);
+  }, [name]);
 
   return (
-    <main className={styles.main}>
-      <div className={styles['summary']}>
-        <div className={styles.container}>
-          <h1 className={styles['section-title']}>Alugar um carro</h1>
-          <p className={styles['small-text']}>
-            Confira todos os carros disponíveis
-          </p>
-          <div className="mt-8">
-            <div className="flex gap-4 items-center w-full">
-              <div className="w-[30%]">
-                <Input
-                  placeholder="Pesquise por um carro"
-                  rightIcon={<MagnifyingGlass size={20} color="#a8a29e" />}
-                />
-              </div>
-              <div className="w-[30%]">
-                <Select options={brands} defaultValue="Filtre por marcas" />
+    <>
+      <Helmet>
+        <title>Alugue um carro - RentX</title>
+      </Helmet>
+
+      <main className={styles.main}>
+        <div className={styles['summary']}>
+          <div className={styles.container}>
+            <h1 className={styles['section-title']}>Alugar um carro</h1>
+            <p className={styles['small-text']}>
+              Confira todos os carros disponíveis
+            </p>
+            <div className="mt-8">
+              <div className="flex gap-4 items-center w-full">
+                <div className="w-[30%]">
+                  <Input
+                    placeholder="Pesquise por um carro"
+                    rightIcon={<MagnifyingGlass size={20} color="#a8a29e" />}
+                  />
+                </div>
+                <div className="w-[30%]">
+                  <Select
+                    options={brands}
+                    defaultValue="Filtre por categorias"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <section className={styles.section}>
-        <div className={styles.container}>
-          <div className={styles['grid-container']}>
-            {/* {[...Array(12)].map((_, index) => (
-              <CarCard key={index} car={} />
-            ))} */}
-            {cars.map((car) => (
-              <CarCard
-                key={car.id}
-                car={car}
-                path={`/dashboard/carros/${car.id}`}
-              />
-            ))}
-            {/* <p></p> */}
-            {/* <p>oi</p> */}
+        <section className={styles.section}>
+          <div className={styles.container}>
+            <div className={styles['grid-container']}>
+              {cars.map((car) => (
+                <CarCard
+                  key={car.id}
+                  car={car}
+                  loading={isFetchingCars}
+                  type="rent"
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </>
   );
 }
