@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 
 import { getRentalsByUser } from '~/services/useCases/rentals/list-by-user';
+import { CarCard } from '../../components/CarCard';
 
 import styles from './ReservationsList.module.css';
 
 type Rental = {
   name: string;
   brand: string;
-  price: number;
+  price: string;
+  id: string;
+  expectedReturnDate?: string;
 };
 
 export function ReservationsList() {
@@ -46,47 +49,13 @@ export function ReservationsList() {
           <div className={styles['grid-container']}>
             {rentals && rentals.length > 0 ? (
               rentals.map((rental) => (
-                <a
+                <CarCard
+                  car={rental}
+                  type="rented"
+                  isRentalInProgress={false}
                   key={rental.name}
-                  href="/reservas/as86uja-gahb8s-asgbv7"
-                  className={`${styles.card} relative`}
-                >
-                  <div className={styles['reservation-card-container']}>
-                    <div className="flex flex-col gap-4 justify-between">
-                      <div>
-                        <small className={styles['info-car-text']}>
-                          {rental.brand}
-                        </small>
-                        <span className={styles['car-name']}>
-                          {rental.name}
-                        </span>
-                      </div>
-                      <div>
-                        <small className={styles['info-car-text']}>
-                          Ao dia
-                        </small>
-                        <span className={styles['car-daily-price']}>
-                          R$ {rental.price}
-                        </span>
-                      </div>
-                    </div>
-                    <img
-                      src="https://www.picng.com/upload/porsche/png_porsche_22652.png"
-                      alt=""
-                    />
-                  </div>
-                  {/* {isAppointmentActive && (
-                <>
-                  <div
-                    className={styles['active-reservation-animated']}
-                  ></div>
-                  <div
-                    title="Reserva em andamento"
-                    className={styles['active-reservation']}
-                  ></div>
-                </>
-              )} */}
-                </a>
+                  loading={false}
+                />
               ))
             ) : (
               <p>Você não possui registro de reservas</p>
