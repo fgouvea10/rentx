@@ -1,3 +1,3 @@
 # rentx
 
-Application still in progress
+Application is still in progress
