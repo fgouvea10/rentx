@@ -2,6 +2,8 @@ import { client } from '~/services/client';
 import { ListRentals } from '~/services/protocols/rentals/list-by-user';
 
 interface Response {
+  id: string;
+  expectedReturnDate: string;
   car: {
     name: string;
     brand: string;
@@ -12,11 +14,11 @@ interface Response {
 export async function getRentalsByUser(): Promise<ListRentals.Response[]> {
   const response = await client.get<Response[]>('/rentals/user');
 
-  const cars = response.data.map((item) => item.car);
-
-  return cars.map((car) => ({
-    name: car.name,
-    brand: car.brand,
-    price: car.dailyRate,
-  }));
+  return response.data.map(item => ({
+    name: item.car.name,
+    brand: item.car.brand,
+    price: item.car.dailyRate.toString(),
+    id: item.id,
+    expectedReturnDate: item.expectedReturnDate,
+  }))
 }
