@@ -32,7 +32,7 @@ export function Dashboard() {
     } catch (err) {
       // console.log('err', err);
     } finally {
-      setIsFetchingRentals(false);
+      // setIsFetchingRentals(false);
     }
   };
 
@@ -91,11 +91,18 @@ export function Dashboard() {
                   // const isRentalInProgress =
                   //   rental?.expectedReturnDate &&
                   //   Number(rental.expectedReturnDate) >= Date.now();
-                  return <CarCard car={rental} isRentalInProgress={false} />;
+                  return (
+                    <CarCard
+                      car={rental}
+                      isRentalInProgress={false}
+                      loading={isFetchingRentals}
+                      type="rented"
+                    />
+                  );
                 })
               ) : (
                 <>
-                  <p className='text-stone-600'>
+                  <p className="text-stone-600">
                     Você ainda não possui nenhuma alocação :(
                     <br />
                     <Link to="carros" className="underline text-primary500">
