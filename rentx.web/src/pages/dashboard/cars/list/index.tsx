@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet';
 
 import { Select } from '~/components/shared/Form';
 import { Input } from '~/pages/dashboard/components/SearchInput';
+import { getCarsBySearch } from '~/services/useCases/cars/getBySearch';
 import { listAvailableCars } from '~/services/useCases/cars/list-available-cars';
 import { CarCard } from '../../components/CarCard';
 
@@ -17,44 +18,42 @@ type Car = {
 };
 
 export function ListCars() {
-  const isAppointmentActive = false;
   const [isFetchingCars, setIsFetchingCars] = useState(false);
   const [cars, setCars] = useState<Car[]>([]);
+  const [inputValue, setInputValue] = useState('');
 
-  const brands = [
-    {
-      label: 'Audi',
-      value: 'audi',
-    },
-    {
-      label: 'Toyota',
-      value: 'audi',
-    },
-    {
-      label: 'Chevrolet',
-      value: 'audi',
-    },
-    {
-      label: 'Porsche',
-      value: 'audi',
-    },
-    {
-      label: 'Mercedes Benz',
-      value: 'audi',
-    },
-    {
-      label: 'BMW',
-      value: 'audi',
-    },
-  ];
+  // const brands = [
+  //   {
+  //     label: 'Audi',
+  //     value: 'audi',
+  //   },
+  //   {
+  //     label: 'Toyota',
+  //     value: 'audi',
+  //   },
+  //   {
+  //     label: 'Chevrolet',
+  //     value: 'audi',
+  //   },
+  //   {
+  //     label: 'Porsche',
+  //     value: 'audi',
+  //   },
+  //   {
+  //     label: 'Mercedes Benz',
+  //     value: 'audi',
+  //   },
+  //   {
+  //     label: 'BMW',
+  //     value: 'audi',
+  //   },
+  // ];
 
   const listCars = async () => {
     setIsFetchingCars(true);
 
     try {
       const response = await listAvailableCars();
-      console.log(response);
-      // console.log(response);
       setCars(response);
     } catch (err) {
       setCars([]);
@@ -63,9 +62,21 @@ export function ListCars() {
     }
   };
 
+  async function filterCarsBySearch() {
+    setIsFetchingCars(true);
+    try {
+      const response = await getCarsBySearch(inputValue);
+      setCars(response);
+    } catch (err) {
+      // console.log('err', err);
+    } finally {
+      setIsFetchingCars(false);
+    }
+  }
+
   useEffect(() => {
     listCars();
-  }, [name]);
+  }, []);
 
   return (
     <>
@@ -86,13 +97,16 @@ export function ListCars() {
                   <Input
                     placeholder="Pesquise por um carro"
                     rightIcon={<MagnifyingGlass size={20} color="#a8a29e" />}
+                    onIconClick={filterCarsBySearch}
+                    value={inputValue}
+                    onChange={event => setInputValue(event.target.value)}
                   />
                 </div>
                 <div className="w-[30%]">
-                  <Select
+                  {/* <Select
                     options={brands}
                     defaultValue="Filtre por categorias"
-                  />
+                  /> */}
                 </div>
               </div>
             </div>
