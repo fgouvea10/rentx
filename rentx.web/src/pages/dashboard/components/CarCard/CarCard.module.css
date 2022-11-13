@@ -1,8 +1,12 @@
 .card {
-  @apply border bg-white border-gray-200 rounded-md p-8 w-full flex relative flex-col gap-2;
+  @apply border bg-white border-gray-200 rounded-md p-8 w-full;
 }
 
-.brand-name {
+.reservation-card-container {
+  @apply flex items-center gap-4 justify-between;
+}
+
+.info-car-text {
   @apply block uppercase text-gray-500 text-xs;
 }
 
@@ -10,30 +14,18 @@
   @apply block text-gray-700 text-lg font-medium leading-tight;
 }
 
-.card img {
-  @apply w-full max-w-xs my-0 mx-auto h-auto;
-}
-
-.car-info {
-  @apply flex items-center justify-between;
-}
-
-.car-specifications {
-  @apply flex items-center gap-4;
-}
-
-.car-specification {
-  @apply flex items-center gap-4;
-}
-
-.car-specification svg {
-  @apply text-xl text-primary500;
-}
-
 .car-daily-price {
-  @apply text-primary500 font-medium text-xl mt-8;
+  @apply block text-primary500 text-xl font-medium leading-tight;
 }
 
-.car-daily-text {
-  @apply text-stone-500 font-normal text-base;
+.reservation-card-container img {
+  @apply w-36 h-auto;
+}
+
+.active-reservation-animated {
+  @apply absolute top-0 right-0 -mr-1 -mt-1 w-4 h-4 rounded-full bg-primary500 animate-ping;
+}
+
+.active-reservation {
+  @apply absolute top-0 right-0 -mr-1 -mt-1 w-4 h-4 rounded-full bg-red-300;
 }
