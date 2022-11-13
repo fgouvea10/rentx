@@ -1,71 +1,64 @@
-import { ReactElement } from 'react';
 import { Link } from 'react-router-dom';
-import { Users, ArrowsLeftRight } from 'phosphor-react';
 
 import styles from './CarCard.module.css';
 
-type Specification = {
-  doors: number;
-  gearbox: string;
-};
-
 type Car = {
-  // id: string;
-  // name: string;
-  // brand: string;
-  // price: number;
-  // specifications: Specification;
-  // image: string;
-  id: string;
   name: string;
   brand: string;
   price: string;
+  id: string;
+  expectedReturnDate?: string;
 };
 
 type CarCardProps = {
-  loading?: boolean;
-  path: string;
+  isRentalInProgress?: boolean;
   car: Car;
+  type: 'rented' | 'rent';
+  loading?: boolean;
 };
 
-export function CarCard({ car, path, loading }: CarCardProps): ReactElement {
+export function CarCard({
+  car,
+  isRentalInProgress,
+  loading,
+  type,
+}: CarCardProps) {
   if (loading) {
     return (
-      <>
-        {[...Array(3)].map((_, index) => (
-          <div
-            key={index}
-            className="w-full lg:w-[396px] rounded-md h-60 bg-gray-300 animate-pulse"
-          />
-        ))}
-      </>
+      <div className="flex justify-center items-center w-full h-48 animate-pulse bg-gray-300 rounded" />
     );
   }
 
   return (
-    <Link to={path} className={styles.card}>
-      <div>
-        <strong className={styles['car-name']}>{car.name}</strong>
-        <small className={styles['brand-name']}>{car.brand}</small>
-      </div>
-      <img
-        src="http://images.dealer.com/ddc/vehicles/2020/Audi/Q8/SUV/trim_55_Premium_f33abe/perspective/side-left/2020_24.png"
-        alt=""
-      />
-      <div className={styles['car-info']}>
-        {/* <div className={styles['car-specifications']}>
-          <div className={styles['car-specification']}>
-            <Users /> {car.specifications.doors}
+    <Link
+      to={type === 'rent' ? `/dashboard/carros/${car.id}` : `/dashboard/reservas/${car.id}`}
+      className={`${styles.card} relative`}
+    >
+      <div className={styles['reservation-card-container']}>
+        <div className="flex flex-col gap-4 justify-between">
+          <div>
+            <small className={styles['info-car-text']}>{car.brand}</small>
+            <span className={styles['car-name']}>{car.name}</span>
           </div>
-          <div className={styles['car-specification']}>
-            <ArrowsLeftRight /> {car.specifications.gearbox}
+          <div>
+            <small className={styles['info-car-text']}>Ao dia</small>
+            <span className={styles['car-daily-price']}>R$ {car.price}</span>
           </div>
-        </div> */}
-        <span className={styles['car-daily-price']}>
-          R$ {car.price}
-          <span className={styles['car-daily-text']}>/dia</span>
-        </span>
+        </div>
+        <img
+          src="https://www.picng.com/upload/porsche/png_porsche_22652.png"
+          alt=""
+        />
       </div>
+      {isRentalInProgress && (
+        <>
+          <div className={styles['active-reservation-animated']}></div>
+          <div
+            title="Reserva em andamento"
+            className={styles['active-reservation']}
+          ></div>
+        </>
+      )}
     </Link>
   );
 }
