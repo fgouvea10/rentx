@@ -1,5 +1,5 @@
 .main {
-  @apply w-full relative block bg-gray-50;
+  @apply w-full relative block bg-gray-50 min-h-screen;
 }
 
 .container {
