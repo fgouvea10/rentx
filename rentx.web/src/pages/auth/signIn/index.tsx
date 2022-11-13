@@ -111,7 +111,6 @@ export function SignIn() {
             </div>
 
             <div className={styles['keep-connected-container']}>
-              <p>Mantenha-me conectado</p>
               <a href="/forgot-password" className={styles['info-link']}>
                 Esqueci minha senha
               </a>
